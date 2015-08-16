@@ -1,0 +1,2315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lodash.lua documentation</title>
+    <link rel="stylesheet" href="../ldoc_fixed.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lodash.lua</h1>
+
+
+
+
+<h2>Source</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><strong>lodash.lua</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="../index.html">lodash</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+    <h2>lodash.lua</h2>
+<pre>
+<span class="comment">---
+</span><span class="comment">-- lodash for lua
+</span><span class="comment">-- @module lodash
+</span><span class="comment">-- @author Ted Moghimi
+</span><span class="comment">-- @license MIT
+</span>
+<span class="keyword">local</span> _ = {}
+
+<span class="comment">--- Array
+</span><span class="comment">-- @section Array
+</span>
+<span class="comment">---
+</span><span class="comment">-- Creates an array of elements split into groups the length of size.
+</span><span class="comment">-- If collection can’t be split evenly, the final chunk will be the
+</span><span class="comment">-- remaining elements.
+</span><span class="comment">-- @usage local t = _.chunk({'x', 'y', 'z', 1, 2, 3, 4, true , false}, 4)
+</span><span class="comment">-- _.print(t)
+</span><span class="comment">-- --&gt; {{"x", "y", "z", 1}, {2, 3, 4, true}, {false}}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to process.
+</span><span class="comment">-- @param[opt=1] size The length of each chunk.
+</span><a id="23"></a><span class="comment">-- @return the new array containing chunks.
+</span>_.chunk = <span class="keyword">function</span> (array, size)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">local</span> size = size == <span class="number">0</span> <span class="keyword">and</span> <span class="number">1</span> <span class="keyword">or</span> size <span class="keyword">or</span> <span class="number">1</span>
+    <span class="keyword">local</span> c, i = <span class="number">1</span>, <span class="number">1</span>
+    <span class="keyword">while</span> <span class="keyword">true</span> <span class="keyword">do</span>
+        t[i] = {}
+        <span class="keyword">for</span> j = <span class="number">1</span>, size <span class="keyword">do</span>
+            _.push(t[i], array[c])
+            c = c + <span class="number">1</span>
+        <span class="keyword">end</span>
+        <span class="keyword">if</span> _.gt(c, #array) <span class="keyword">then</span>
+            <span class="keyword">break</span>
+        <span class="keyword">end</span>
+        i = i + <span class="number">1</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array with all falsey values removed. The values false,
+</span><span class="comment">-- nil are falsey.
+</span><span class="comment">-- @usage local t = _.compact({'x', 'y', nil, 1, 2, 3, false, true , false})
+</span><span class="comment">-- _.print(t)
+</span><span class="comment">-- --&gt; {"x", "y", 1, 2, 3, true}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to compact
+</span><a id="50"></a><span class="comment">-- @return Returns the new array of filtered values
+</span>_.compact = <span class="keyword">function</span> (array)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(array) <span class="keyword">do</span>
+        <span class="keyword">if</span> v <span class="keyword">then</span>
+            _.push(t, v)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array of unique array values not included in the other
+</span><span class="comment">-- provided arrays.
+</span><span class="comment">-- @usage _.print(_.difference({3, 1, 2, 9, 5, 9}, {4, 5}, {9, 1}))
+</span><span class="comment">-- --&gt; {3, 2}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to inspect.
+</span><span class="comment">-- @param ... The arrays of values to exclude.
+</span><a id="70"></a><span class="comment">-- @return Returns the new array of filtered values.
+</span>_.difference = <span class="keyword">function</span> (array, ...)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">local</span> c = <span class="number">1</span>
+    <span class="keyword">local</span> tmp = _.<span class="global">table</span>(...)
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">ipairs</span>(array) <span class="keyword">do</span>
+        <span class="keyword">while</span> <span class="keyword">not</span> _.isNil(tmp[c]) <span class="keyword">do</span>
+            <span class="keyword">for</span> j, v2 <span class="keyword">in</span> <span class="global">ipairs</span>(tmp[c]) <span class="keyword">do</span>
+                <span class="keyword">if</span> v == v2 <span class="keyword">then</span> goto doubleBreak <span class="keyword">end</span>
+            <span class="keyword">end</span>
+            c = c + <span class="number">1</span>
+        <span class="keyword">end</span>
+        _.push(t, v)
+        ::doubleBreak::
+        c = <span class="number">1</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a slice of array with n elements dropped from the beginning.
+</span><span class="comment">-- @usage _.print(_.drop({1, 2, 3, 4, 5, 6}, 2))
+</span><span class="comment">-- --&gt; {3, 4, 5, 6}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><span class="comment">-- @param[opt=1] n The number of elements to drop.
+</span><a id="96"></a><span class="comment">-- @return Returns the slice of array.
+</span>_.drop = <span class="keyword">function</span> (array, n)
+    <span class="keyword">local</span> n = n <span class="keyword">or</span> <span class="number">1</span>
+    <span class="keyword">return</span> _.slice(array, n + <span class="number">1</span>)
+<span class="keyword">end</span>
+
+
+<span class="keyword">local</span> callIteratee = <span class="keyword">function</span> (predicate, selfArg, ...)
+    <span class="keyword">local</span> result
+    <span class="keyword">local</span> predicate = predicate <span class="keyword">or</span> _.identity
+    <span class="keyword">if</span> selfArg <span class="keyword">then</span>
+        result = predicate(selfArg, ...)
+    <span class="keyword">else</span>
+        result = predicate(...)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> result
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a slice of array with n elements dropped from the end.
+</span><span class="comment">-- @usage _.print(_.dropRight({1, 2, 3, 4, 5, 6}, 2))
+</span><span class="comment">-- --&gt; {1, 2, 3, 4}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><span class="comment">-- @param[opt=1] n The number of elements to drop.
+</span><a id="121"></a><span class="comment">-- @return Returns the slice of array.
+</span>_.dropRight = <span class="keyword">function</span> (array, n)
+    <span class="keyword">local</span> n = n <span class="keyword">or</span> <span class="number">1</span>
+    <span class="keyword">return</span> _.slice(array, <span class="keyword">nil</span>, #array - n)
+<span class="keyword">end</span>
+
+
+<span class="keyword">local</span> dropWhile = <span class="keyword">function</span>(array, predicate, selfArg, start, step, right)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">local</span> c = start
+    <span class="keyword">while</span> <span class="keyword">not</span> _.isNil(array[c]) <span class="keyword">do</span>
+        ::cont::
+        <span class="keyword">if</span> #t == <span class="number">0</span> <span class="keyword">and</span>
+            callIteratee(predicate, selfArg, array[c], c, array) <span class="keyword">then</span>
+            c = c + step
+            goto cont
+        <span class="keyword">end</span>
+        <span class="keyword">if</span> right <span class="keyword">then</span>
+            _.enqueue(t, array[c])
+        <span class="keyword">else</span>
+            _.push(t, array[c])
+        <span class="keyword">end</span>
+        c = c + step
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a slice of array excluding elements dropped from the end.
+</span><span class="comment">-- Elements are dropped until predicate returns falsey.
+</span><span class="comment">-- @usage _.print(_.dropRightWhile({1, 5, 2, 3, 4, 5, 4, 4}, function(n)
+</span><span class="comment">--    return n &gt; 3
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {1, 5, 2, 3}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><span class="comment">-- @param[opt=_.identity] predicate The function to invoked per iteratin.
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="159"></a><span class="comment">-- @return Return the slice of array.
+</span>_.dropRightWhile = <span class="keyword">function</span>(array, predicate, selfArg)
+    <span class="keyword">return</span> dropWhile(array, predicate, selfArg, #array, -<span class="number">1</span>, <span class="keyword">true</span>)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a slice of array excluding elements dropped from the beginning.
+</span><span class="comment">-- Elements are dropped until predicate returns falsey.
+</span><span class="comment">-- @usage _.print(_.dropWhile({1, 2, 2, 3, 4, 5, 4, 4, 2}, function(n)
+</span><span class="comment">--    return n &lt; 3
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {3, 4, 5, 4, 4, 2}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><span class="comment">-- @param[opt=_.idenitity] predicate The function invoked per iteration.
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="175"></a><span class="comment">-- @return Return the slice of array.
+</span>_.dropWhile = <span class="keyword">function</span>(array, predicate, selfArg)
+    <span class="keyword">return</span> dropWhile(array, predicate, selfArg, <span class="number">1</span>, <span class="number">1</span>)
+<span class="keyword">end</span>
+
+_.enqueue = <span class="keyword">function</span> (array, value)
+    <span class="keyword">return</span> <span class="global">table</span>.insert(array, <span class="number">1</span>, value)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Fills elements of array with value from start up to, including, end.
+</span><span class="comment">-- @usage local array = {1, 2, 3, 4}
+</span><span class="comment">-- _.fill(array, 'x', 2, 3)
+</span><span class="comment">-- _.print(array)
+</span><span class="comment">-- --&gt; {1, "x", "x", 4}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to fill.
+</span><span class="comment">-- @param value The value to fill array with.
+</span><span class="comment">-- @param[opt=1] start The start position.
+</span><span class="comment">-- @param[opt=#array] stop The end position.
+</span><a id="195"></a><span class="comment">-- @return Returns array.
+</span>_.fill = <span class="keyword">function</span> (array, value, start, stop)
+    <span class="keyword">local</span> start = start <span class="keyword">or</span> <span class="number">1</span>
+    <span class="keyword">local</span> stop = stop <span class="keyword">or</span> #array
+    <span class="keyword">for</span> i=start, stop, start &gt; stop <span class="keyword">and</span> -<span class="number">1</span> <span class="keyword">or</span> <span class="number">1</span> <span class="keyword">do</span>
+        array[i] = value
+    <span class="keyword">end</span>
+    <span class="keyword">return</span>  array
+<span class="keyword">end</span>
+
+
+<span class="keyword">local</span> findIndex = <span class="keyword">function</span>(array, predicate, selfArg, start, step)
+    <span class="keyword">local</span> c = start
+    <span class="keyword">while</span> <span class="keyword">not</span> _.isNil(array[c]) <span class="keyword">do</span>
+        <span class="keyword">if</span> callIteratee(predicate, selfArg, array[c], c, array) <span class="keyword">then</span>
+            <span class="keyword">return</span> c
+        <span class="keyword">end</span>
+        c = c + step
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> -<span class="number">1</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- This method is like [_.find](#_.find) except that it returns the index of the
+</span><span class="comment">-- first element predicate returns truthy for instead of the element itself.
+</span><span class="comment">-- @usage _.print(_.findIndex({{a = 1}, {a = 2}, {a = 3}, {a = 2}, {a = 3}}, function(v)
+</span><span class="comment">--     return v.a == 3
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; 3
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to search.
+</span><span class="comment">-- @param[opt=_.idenitity] predicate The function invoked per iteration.
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="228"></a><span class="comment">-- @return Returns the index of the found element, else -1.
+</span>_.findIndex = <span class="keyword">function</span> (array, predicate, selfArg)
+    <span class="keyword">return</span> findIndex(array, predicate, selfArg, <span class="number">1</span>, <span class="number">1</span>)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- This method is like [_.findIndex](#_.findIndex) except that it iterates over
+</span><span class="comment">-- elements of collection from right to left.
+</span><span class="comment">-- @usage _.print(_.findLastIndex({{a = 1}, {a = 2}, {a = 3}, {a = 2}, {a = 3}}, function(v)
+</span><span class="comment">--     return v.a == 3
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; 5
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to search.
+</span><span class="comment">-- @param[opt=_.idenitity] predicate The function invoked per iteration.
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="244"></a><span class="comment">-- @return Returns the index of the found element, else -1.
+</span>_.findLastIndex = <span class="keyword">function</span> (array, predicate, selfArg)
+    <span class="keyword">return</span> findIndex(array, predicate, selfArg, #array, -<span class="number">1</span>)
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Gets the first element of array.
+</span><span class="comment">-- @usage _.print(_.first({'w', 'x', 'y', 'z'}))
+</span><span class="comment">-- --&gt; w
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><a id="256"></a><span class="comment">-- @return Returns the first element of array.
+</span>_.first = <span class="keyword">function</span> (array)
+    <span class="keyword">return</span> array[<span class="number">1</span>]
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Flattens a nested array.
+</span><span class="comment">-- If isDeep is true the array is recursively flattened, otherwise
+</span><span class="comment">-- it’s only flattened a single level.
+</span><span class="comment">-- @usage _.print(_.flatten({1, 2, {3, 4, {5, 6}}}))
+</span><span class="comment">-- --&gt; {1, 2, 3, 4, {5, 6}}
+</span><span class="comment">-- _.print(_.flatten({1, 2, {3, 4, {5, 6}}}, true))
+</span><span class="comment">-- --&gt; {1, 2, 3, 4, 5, 6}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to flatten.
+</span><span class="comment">-- @param isDeep Specify a deep flatten
+</span><a id="272"></a><span class="comment">-- @return Returns the new flattened array.
+</span>_.flatten = <span class="keyword">function</span>(array, isDeep)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">ipairs</span>(array) <span class="keyword">do</span>
+        <span class="keyword">if</span> _.isTable(v) <span class="keyword">then</span>
+            <span class="keyword">local</span> childeren
+            <span class="keyword">if</span> isDeep <span class="keyword">then</span>
+                childeren = _.flatten(v)
+            <span class="keyword">else</span>
+                childeren = v
+            <span class="keyword">end</span>
+            <span class="keyword">for</span> k2, v2 <span class="keyword">in</span> <span class="global">ipairs</span>(childeren) <span class="keyword">do</span>
+                _.push(t, v2)
+            <span class="keyword">end</span>
+        <span class="keyword">else</span>
+            _.push(t, v)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Recursively flattens a nested array.
+</span><span class="comment">-- @usage _.print(_.flattenDeep({1, 2, {3, 4, {5, 6}}}))
+</span><span class="comment">-- --&gt; {1, 2, 3, 4, 5, 6}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to flatten.
+</span><a id="299"></a><span class="comment">-- @return Returns the new flattened array.
+</span>_.flattenDeep = <span class="keyword">function</span> (array)
+    <span class="keyword">return</span> _.flatten(array, <span class="keyword">true</span>)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Gets the index at which the first occurrence of value is found in array.
+</span><span class="comment">-- @usage _.print(_.indexOf({2, 3, 'x', 4}, 'x'))
+</span><span class="comment">-- --&gt; 3
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to search.
+</span><span class="comment">-- @param value The value to search for.
+</span><span class="comment">-- @param[opt=1] fromIndex The index to search from.
+</span><a id="312"></a><span class="comment">-- @return  Returns the index of the matched value, else -1.
+</span>_.indexOf = <span class="keyword">function</span> (array, value, fromIndex)
+    <span class="keyword">return</span> _.findIndex(array, <span class="keyword">function</span>(n)
+        <span class="keyword">return</span> n == value
+    <span class="keyword">end</span>)
+<span class="keyword">end</span>
+<span class="comment">--
+</span>
+<span class="comment">---
+</span><span class="comment">-- Gets all but the last element of array.
+</span><span class="comment">-- @usage _.print(_.initial({1, 2, 3, 'a'}))
+</span><span class="comment">-- --&gt; {1, 2, 3}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><a id="326"></a><span class="comment">-- @return Returns the slice of array.
+</span>_.initial = <span class="keyword">function</span> (array)
+    <span class="keyword">return</span> _.slice(array, <span class="keyword">nil</span>, #array - <span class="number">1</span>)
+<span class="keyword">end</span>
+<span class="comment">--
+</span>
+<span class="comment">---
+</span><span class="comment">-- Creates an array of unique values that are included in all of the
+</span><span class="comment">-- provided arrays.
+</span><span class="comment">-- @usage _.print(_.intersection({1, 2}, {4, 2}, {2, 1}))
+</span><span class="comment">-- --&gt; {2}
+</span><span class="comment">--
+</span><span class="comment">-- @param The arrays to inspect.
+</span><a id="339"></a><span class="comment">-- @return Returns the new array of shared values.
+</span>_.intersection = <span class="keyword">function</span> (...)
+    <span class="keyword">local</span> tmp = _.<span class="global">table</span>(...)
+    <span class="keyword">local</span> first = <span class="global">table</span>.remove(tmp, <span class="number">1</span>)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="global">ipairs</span>(first) <span class="keyword">do</span>
+        <span class="keyword">local</span> notFound = <span class="keyword">false</span>
+        <span class="keyword">for</span> i2, v2 <span class="keyword">in</span> <span class="global">ipairs</span>(tmp) <span class="keyword">do</span>
+            <span class="keyword">if</span> _.indexOf(v2, v) == -<span class="number">1</span> <span class="keyword">then</span>
+                notFound = <span class="keyword">true</span>
+                <span class="keyword">break</span>
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+        <span class="keyword">if</span> <span class="keyword">not</span> notFound <span class="keyword">then</span>
+            _.push(t, v)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+    <span class="comment">-- body
+</span><span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Gets the last element of array.
+</span><span class="comment">-- @usage _.print(_.last({'w', 'x', 'y', 'z'}))
+</span><span class="comment">-- --&gt; z
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><a id="367"></a><span class="comment">-- @return Returns the last element of array.
+</span>_.last = <span class="keyword">function</span>(array)
+    <span class="keyword">return</span> array[#array]
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- This method is like [_.indexOf](#_.indexOf) except that it iterates
+</span><span class="comment">--  over elements of array from right to left.
+</span><span class="comment">-- @usage _.print(_.lastIndexOf({2, 3, 'x', 4, 'x', 5}, 'x'))
+</span><span class="comment">-- --&gt; 5
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to search.
+</span><span class="comment">-- @param value The value to search for.
+</span><span class="comment">-- @param[opt=#array] fromIndex The index to search from.
+</span><a id="381"></a><span class="comment">-- @return  Returns the index of the matched value, else -1.
+</span>_.lastIndexOf = <span class="keyword">function</span> (array, value, fromIndex)
+   <span class="keyword">return</span> _.findLastIndex(array, <span class="keyword">function</span>(n)
+        <span class="keyword">return</span> n == value
+    <span class="keyword">end</span>)
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Removes all provided values from array.
+</span><span class="comment">-- @usage local array = {1, 2, 3, 4, 5, 4, 1, 2, 3}
+</span><span class="comment">-- _.pull(array, 2, 3)
+</span><span class="comment">-- _.print(array)
+</span><span class="comment">-- --&gt; {1, 4, 5, 4, 1}
+</span><span class="comment">-- @param array The array to modify.
+</span><span class="comment">-- @param ... The values to remove.
+</span><a id="397"></a><span class="comment">-- @return Returns array
+</span>_.pull = <span class="keyword">function</span>(array, ...)
+    <span class="keyword">local</span> i = <span class="number">1</span>
+    <span class="keyword">while</span> <span class="keyword">not</span> _.isNil(array[i]) <span class="keyword">do</span>
+        <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">ipairs</span>(_.<span class="global">table</span>(...)) <span class="keyword">do</span>
+            <span class="keyword">if</span> array[i] == v <span class="keyword">then</span>
+                <span class="global">table</span>.remove(array, i)
+                goto cont
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+        i = i + <span class="number">1</span>
+        ::cont::
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> array
+<span class="keyword">end</span>
+
+_.push = <span class="keyword">function</span> (array, value)
+    <span class="keyword">return</span> <span class="global">table</span>.insert(array, value)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Removes elements from array corresponding to the given indexes and
+</span><span class="comment">-- returns an array of the removed elements. Indexes may be specified
+</span><span class="comment">-- as an array of indexes or as individual arguments.
+</span><span class="comment">-- @usage local array = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'}
+</span><span class="comment">-- local t = _.pullAt(array, 4, 9, 8)
+</span><span class="comment">-- _.print(array)
+</span><span class="comment">-- --&gt; {"a", "b", "c", "e", "f", "g", "j"}
+</span><span class="comment">-- _.print(t)
+</span><span class="comment">-- --&gt; {"d", "h", "i"}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to modify.
+</span><span class="comment">-- @param ... The indexes of elements to remove
+</span><a id="430"></a><span class="comment">-- @return Returns the new array of removed elements.
+</span>_.pullAt = <span class="keyword">function</span> (array, ...)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">local</span> tmp = _.<span class="global">table</span>(...)
+    <span class="global">table</span>.sort(tmp, <span class="keyword">function</span>(a, b)
+        <span class="keyword">return</span> _.gt(a, b)
+    <span class="keyword">end</span>)
+    <span class="keyword">for</span> i, index <span class="keyword">in</span> <span class="global">ipairs</span>(tmp) <span class="keyword">do</span>
+        _.enqueue(t, <span class="global">table</span>.remove(array, index))
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Removes all elements from array that predicate returns truthy for
+</span><span class="comment">-- and returns an array of the removed elements.
+</span><span class="comment">-- @usage local array = {1, 2, 3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 1, 2, 3, 5, 4}
+</span><span class="comment">-- local t = _.remove(array, function(value)
+</span><span class="comment">--     return value &gt; 4
+</span><span class="comment">-- end)
+</span><span class="comment">-- _.print(array)
+</span><span class="comment">-- --&gt; {1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4}
+</span><span class="comment">-- _.print(t)
+</span><span class="comment">-- --&gt; {5, 6, 7, 5, 6, 5}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to modify.
+</span><span class="comment">-- @param predicate The function invoked per iteration.
+</span><a id="457"></a><span class="comment">-- @return Returns the new array of removed elements
+</span>_.remove = <span class="keyword">function</span>(array, predicate)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">local</span> c = <span class="number">1</span>
+    <span class="keyword">local</span> predicate = predicate <span class="keyword">or</span> _.identity
+    <span class="keyword">while</span> <span class="keyword">not</span> _.isNil(array[c]) <span class="keyword">do</span>
+        <span class="keyword">if</span> predicate(array[c], c, array) <span class="keyword">then</span>
+            _.push(t, <span class="global">table</span>.remove(array, c))
+            goto cont
+        <span class="keyword">end</span>
+        c = c + <span class="number">1</span>
+        ::cont::
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Gets all but the first element of array.
+</span><span class="comment">-- @usage _.print(_.rest({1, 2, 3, 'a'}))
+</span><span class="comment">-- --&gt; {2, 3, 'a'}
+</span><span class="comment">-- @param array The array to query.
+</span><a id="479"></a><span class="comment">-- @return Returns the slice ofa array.
+</span>_.rest = <span class="keyword">function</span> (array)
+    <span class="keyword">return</span> _.slice(array, <span class="number">2</span>, #array)
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Reverses the array so the first element becomes the last, the second
+</span><span class="comment">-- element becomes the second to last, and so on.
+</span><span class="comment">-- @usage _.print(_.reverse({1, 2, 3, 'a', 'b'}))
+</span><span class="comment">-- --&gt; {'b', 'a', 3, 2, 1}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to mutate.
+</span><a id="492"></a><span class="comment">-- @return Returns the new reversed array.
+</span>_.reverse = <span class="keyword">function</span> (array)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="global">ipairs</span>(array) <span class="keyword">do</span>
+        _.enqueue(t, v)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Creates a slice of array from start up to, including, end.
+</span><span class="comment">-- @usage _.print(_.slice({1, 2, 3, 4, 5, 6}, 2, 3))
+</span><span class="comment">-- --&gt; {2, 3}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to slice.
+</span><span class="comment">-- @param[opt=1] start The start position.
+</span><span class="comment">-- @param[opt=#array] stop The end position
+</span><a id="510"></a><span class="comment">-- @return Returns the slice of array.
+</span>_.slice = <span class="keyword">function</span> (array, start, stop)
+    <span class="keyword">local</span> start = start <span class="keyword">or</span> <span class="number">1</span>
+    <span class="keyword">local</span> stop = stop <span class="keyword">or</span> #array
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> i=start, stop <span class="keyword">do</span>
+        t[i - start + <span class="number">1</span>] = array[i]
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a slice of array with n elements taken from the beginning.
+</span><span class="comment">-- @usage _.print(_.take({1, 2, 3, 4, 5}, 3))
+</span><span class="comment">-- --&gt; {1, 2, 3}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><span class="comment">-- @param[opt=1] n The number of elements to take.
+</span><a id="528"></a><span class="comment">-- @return Returns the slice of array.
+</span>_.take = <span class="keyword">function</span>(array, n)
+    <span class="keyword">local</span> n = n <span class="keyword">or</span> <span class="number">1</span>
+    <span class="keyword">return</span> _.slice(array, <span class="number">1</span>, n)
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Creates a slice of array with n elements taken from the end.
+</span><span class="comment">-- @usage _.print(_.takeRight({1, 2, 3, 4, 5}, 3))
+</span><span class="comment">-- --&gt; {3, 4, 5}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><span class="comment">-- @param[opt=1] n The number of elements to take.
+</span><a id="542"></a><span class="comment">-- @return Returns the slice of array.
+</span>_.takeRight = <span class="keyword">function</span> (array, n)
+    <span class="keyword">local</span> n = n <span class="keyword">or</span> <span class="number">1</span>
+    <span class="keyword">return</span> _.slice(array, #array - n +<span class="number">1</span>)
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> takeWhile = <span class="keyword">function</span>(array, predicate, selfArg, start, step, right)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">local</span> c = start
+    <span class="keyword">while</span> <span class="keyword">not</span> _.isNil(array[c]) <span class="keyword">do</span>
+        <span class="keyword">if</span> callIteratee(predicate, selfArg, array[c], c, array) <span class="keyword">then</span>
+            <span class="keyword">if</span> right <span class="keyword">then</span>
+                _.enqueue(t, array[c])
+            <span class="keyword">else</span>
+                _.push(t, array[c])
+            <span class="keyword">end</span>
+        <span class="keyword">else</span>
+            <span class="keyword">break</span>
+        <span class="keyword">end</span>
+        c = c + step
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a slice of array with elements taken from the end. Elements
+</span><span class="comment">-- are taken until predicate returns falsey. The predicate is bound to
+</span><span class="comment">-- selfArg and invoked with three arguments: (value, index, array).
+</span><span class="comment">-- @usage _.print(_.takeRightWhile({1, 2, 3, 4, 5, 6, 7, 8}, function(n)
+</span><span class="comment">--     return n &gt; 4
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {5, 6, 7, 8}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><span class="comment">-- @param predicate The function invoked per iteration.
+</span><a id="577"></a><span class="comment">-- @param selfArg The self binding of predicate.
+</span>_.takeRightWhile = <span class="keyword">function</span> (array, predicate, selfArg)
+    <span class="keyword">return</span> takeWhile(array, predicate, selfArg, #array, -<span class="number">1</span>, <span class="keyword">true</span>)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array of unique values, from all of the
+</span><span class="comment">-- provided arrays.
+</span><span class="comment">-- @usage _.print(_.union({1, 2}, {4, 2}, {2, 1}))
+</span><span class="comment">-- --&gt; {1, 2, 4}
+</span><span class="comment">--
+</span><a id="588"></a><span class="comment">-- @param ... The arrays to inspect
+</span>_.union = <span class="keyword">function</span> (...)
+    <span class="keyword">local</span> tmp = _.<span class="global">table</span>(...)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> i, array <span class="keyword">in</span> <span class="global">ipairs</span>(tmp) <span class="keyword">do</span>
+        <span class="keyword">for</span> i2, v <span class="keyword">in</span> <span class="global">ipairs</span>(array) <span class="keyword">do</span>
+            <span class="keyword">if</span> _.indexOf(t, v) == -<span class="number">1</span> <span class="keyword">then</span>
+                _.push(t, v)
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+
+
+<span class="comment">---
+</span><span class="comment">-- Creates a slice of array with elements taken from the beginning. Elements
+</span><span class="comment">-- are taken until predicate returns falsey. The predicate is bound to
+</span><span class="comment">-- selfArg and invoked with three arguments: (value, index, array).
+</span><span class="comment">-- @usage _.print(_.takeWhile({1, 2, 3, 4, 5, 6, 7, 8}, function(n)
+</span><span class="comment">--     return n &lt; 5
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {1, 2, 3, 4}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to query.
+</span><span class="comment">-- @param predicate The function invoked per iteration.
+</span><a id="615"></a><span class="comment">-- @param selfArg The self binding of predicate.
+</span>_.takeWhile = <span class="keyword">function</span> (array, predicate, selfArg)
+    <span class="keyword">return</span> takeWhile(array, predicate, selfArg, <span class="number">1</span>, <span class="number">1</span>)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a duplicate-free version of an array in which only the first
+</span><span class="comment">-- occurence of each element is kept. If an iteratee function is provided
+</span><span class="comment">-- it’s invoked for each element in the array to generate the criterion
+</span><span class="comment">-- by which uniqueness is computed. The iteratee is bound to thisArg and
+</span><span class="comment">-- invoked with three arguments: (value, index, array).
+</span><span class="comment">-- @usage _.print(_.uniq({1, 3, 2, 2}))
+</span><span class="comment">-- --&gt; {1, 3, 2}
+</span><span class="comment">--_.print(_.uniq({{x=1}, {x=2}, {x=2}, {x=3}, {x=1}}, function(n)
+</span><span class="comment">--     return n.x
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {{["x"]=1}, {["x"]=2}, {["x"]=3}}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to inspect.
+</span><span class="comment">-- @param iteratee The function invoked per iteration.
+</span><span class="comment">-- @param selfArg The self binding of predicate.
+</span><a id="636"></a><span class="comment">-- @return Returns the new duplicate-value-free array.
+</span>_.uniq = <span class="keyword">function</span>(array, iteratee, selfArg)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">local</span> results = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">ipairs</span>(array) <span class="keyword">do</span>
+        <span class="keyword">local</span> r = callIteratee(iteratee, selfArg, v, k, array)
+        <span class="keyword">if</span> _.indexOf(results, r) == -<span class="number">1</span> <span class="keyword">then</span>
+            _.push(t, v)
+        <span class="keyword">end</span>
+        _.push(results, r)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- The inverse of _.pairs; this method returns an object composed from
+</span><span class="comment">-- arrays of property names and values. Provide either a single two dimensional
+</span><span class="comment">-- array, e.g. [[key1, value1], [key2, value2]] or two arrays, one of
+</span><span class="comment">-- property names and one of corresponding values.
+</span><span class="comment">-- @usage _.print(_.zipObject({{'fred', 30}, {'alex', 20}}))
+</span><span class="comment">-- --&gt; {["alex"]=20, ["fred"]=30}
+</span><span class="comment">-- _.print(_.zipObject({'fred', 'alex'}, {30, 20}))
+</span><span class="comment">-- --&gt; {["alex"]=20, ["fred"]=30}
+</span><span class="comment">--
+</span><span class="comment">-- @param ... The properties/values
+</span><a id="661"></a><span class="comment">-- @return Returns the new object.
+</span>_.zipObject = <span class="keyword">function</span> (...)
+    <span class="keyword">local</span> tmp = _.<span class="global">table</span>(...)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">if</span> #tmp == <span class="number">1</span> <span class="keyword">then</span>
+        <span class="keyword">for</span> i, pair <span class="keyword">in</span> <span class="global">ipairs</span>(tmp[<span class="number">1</span>]) <span class="keyword">do</span>
+            t[pair[<span class="number">1</span>]] = pair[<span class="number">2</span>]
+        <span class="keyword">end</span>
+    <span class="keyword">else</span>
+        <span class="keyword">for</span> i = <span class="number">1</span>, #tmp[<span class="number">1</span>] <span class="keyword">do</span>
+            t[tmp[<span class="number">1</span>][i]] = tmp[<span class="number">2</span>][i]
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- This method is like [_.zip](#_.zip) except that it accepts an array of grouped
+</span><span class="comment">-- elements and creates an array regrouping the elements to their pre-zip
+</span><span class="comment">-- configuration.
+</span><span class="comment">-- @usage local t = _.zip({'a', 'b', 'c'}, {1, 2, 3}, {10, 20, 30})
+</span><span class="comment">-- _.print(t)
+</span><span class="comment">-- --&gt; {{"a", 1, 10}, {"b", 2, 20}, {"c", 3, 30}}
+</span><span class="comment">-- _.print(_.unzip(t))
+</span><span class="comment">-- --&gt; {{"a", "b", "c"}, {1, 2, 3}, {10, 20, 30}}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array of grouped elements to process.
+</span><a id="689"></a><span class="comment">-- @return Returns the new array of regrouped elements.
+</span>_.unzip = <span class="keyword">function</span> (array)
+    <span class="keyword">return</span> _.zip(_.args(array))
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array excluding all provided values
+</span><span class="comment">-- @usage _.print(_.without({1,1, 2, 3, 2, 3, 5, 5, 1, 2},  5, 1))
+</span><span class="comment">-- --&gt; {2, 3, 2, 3, 2}
+</span><span class="comment">--
+</span><span class="comment">-- @param array The array to filter.
+</span><span class="comment">-- @param ... The values to exclude.
+</span><a id="701"></a><span class="comment">-- @return Returns the new array of filtered values.
+</span>_.without = <span class="keyword">function</span> (array, ...)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="global">ipairs</span>(array) <span class="keyword">do</span>
+        <span class="keyword">local</span> args = _.<span class="global">table</span>(...)
+        <span class="keyword">if</span> _.indexOf(args, v) == -<span class="number">1</span> <span class="keyword">then</span>
+            _.push(t, v)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array of grouped elements, the first of which contains
+</span><span class="comment">-- the first elements of the given arrays, the second of which contains
+</span><span class="comment">-- the second elements of the given arrays, and so on.
+</span><span class="comment">-- @usage local t = _.zip({'a', 'b', 'c'}, {1, 2, 3}, {10, 20, 30})
+</span><span class="comment">-- _.print(t)
+</span><span class="comment">-- --&gt; {{"a", 1, 10}, {"b", 2, 20}, {"c", 3, 30}}
+</span><span class="comment">--
+</span><span class="comment">-- @param ... The arrays to process
+</span><a id="722"></a><span class="comment">-- @return Returns the new array of grouped elements.
+</span>_.zip = <span class="keyword">function</span> (...)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> i, array <span class="keyword">in</span> <span class="global">ipairs</span>(_.<span class="global">table</span>(...)) <span class="keyword">do</span>
+        <span class="keyword">for</span> j, v <span class="keyword">in</span> <span class="global">ipairs</span>(array) <span class="keyword">do</span>
+            t[j] = t[j] <span class="keyword">or</span> {}
+            t[j][i] = v
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">--- Collection
+</span><span class="comment">-- @section Collection
+</span>
+<span class="comment">---
+</span><span class="comment">-- Creates an array of elements corresponding to the given keys,
+</span><span class="comment">-- or indexes, of collection. Keys may be specified as individual
+</span><span class="comment">-- arguments or as arrays of keys.
+</span><span class="comment">-- @usage _.print(_.at({'1', '2', '3', '4', a='a', b='b'}, {1, 2}, 'b'))
+</span><span class="comment">-- --&gt; {"1", "2", "b"}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over.
+</span><span class="comment">-- @param ... The property names or indexes of elements to pick,
+</span><span class="comment">-- specified individually or in arrays.
+</span><a id="747"></a><span class="comment">-- @return Return the new array of picked elements.
+</span>_.at = <span class="keyword">function</span> (collection, ...)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, key <span class="keyword">in</span> <span class="global">ipairs</span>(_.<span class="global">table</span>(...)) <span class="keyword">do</span>
+        <span class="keyword">if</span> _.isTable(key) <span class="keyword">then</span>
+            <span class="keyword">for</span> k, key <span class="keyword">in</span> <span class="global">ipairs</span>(key) <span class="keyword">do</span>
+                _.push(t, collection[key])
+            <span class="keyword">end</span>
+        <span class="keyword">else</span>
+            _.push(t, collection[key])
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an object composed of keys generated from the results of
+</span><span class="comment">-- running each element of collection through iteratee. The corresponding
+</span><span class="comment">-- value of each key is the number of times the key was returned by
+</span><span class="comment">-- iteratee. The iteratee is bound to selfArg and invoked with three arguments:
+</span><span class="comment">-- (value, index|key, collection).
+</span><span class="comment">--
+</span><span class="comment">-- @usage _.print(_.countBy({4.3, 6.1, 6.4}, function(n)
+</span><span class="comment">--   return math.floor(n)
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {[4]=1, [6]=2}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] iteratee The function invoked per iteration.
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="777"></a><span class="comment">-- @return Returns the composed aggregate object.
+</span>_.countBy = <span class="keyword">function</span> (collection, iteratee, selfArg)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        <span class="keyword">local</span> r = _.str(
+            callIteratee(iteratee, selfArg, v, k, collection)
+        )
+        <span class="keyword">if</span> _.isNil(t[r]) <span class="keyword">then</span>
+            t[r] = <span class="number">1</span>
+        <span class="keyword">else</span>
+            t[r] = t[r] + <span class="number">1</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an object composed of keys generated from the results of
+</span><span class="comment">-- running each element of collection through iteratee. The corresponding
+</span><span class="comment">-- value of each key is an array of the elements responsible for generating
+</span><span class="comment">-- the key. The iteratee is bound to selfArg and invoked with three arguments:
+</span><span class="comment">-- (value, index|key, collection).
+</span><span class="comment">-- @usage _.print(_.groupBy({4.3, 6.1, 6.4}, function(n)
+</span><span class="comment">--   return math.floor(n)
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {[4]={4.3}, [6]={6.1, 6.4}}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] iteratee The function invoked per iteration.
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="807"></a><span class="comment">-- @return Returns the composed aggregate object.
+</span>_.groupBy = <span class="keyword">function</span> (collection, iteratee, selfArg)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        <span class="keyword">local</span> r = _.str(
+            callIteratee(iteratee, selfArg, v, k, collection)
+        )
+        <span class="keyword">if</span> _.isNil(t[r]) <span class="keyword">then</span>
+            t[r] = {v}
+        <span class="keyword">else</span>
+            _.push(t[r], v)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an object composed of keys generated from the results of
+</span><span class="comment">-- running each element of collection through iteratee. The corresponding
+</span><span class="comment">-- value of each key is the last element responsible for generating the key.
+</span><span class="comment">-- The iteratee function is bound to selfArg and invoked with three arguments:
+</span><span class="comment">-- (value, index|key, collection).
+</span><span class="comment">-- @usage local keyData = {
+</span><span class="comment">--     {dir='l', a=1},
+</span><span class="comment">--     {dir='r', a=2}
+</span><span class="comment">-- }
+</span><span class="comment">-- _.print('40.indexBy          :', _.indexBy(keyData, function(n)
+</span><span class="comment">--     return n.dir
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {["l"]={[a]=1, [dir]="l"}, ["r"]={[a]=2, [dir]="r"}}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] iteratee The function invoked per iteration.
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="841"></a><span class="comment">-- @return Returns the composed aggregate object.
+</span>_.indexBy = <span class="keyword">function</span> (collection, iteratee, selfArg)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        <span class="keyword">local</span> r = _.str(
+            callIteratee(iteratee, selfArg, v, k, collection)
+        )
+        t[r] = v
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if predicate returns truthy for all elements of collection.
+</span><span class="comment">-- The predicate is bound to selfArg and invoked with three arguments:
+</span><span class="comment">-- (value, index|key, collection).
+</span><span class="comment">-- @usage _.print(_.every({1, 2, 3, 4, '5', 6}, _.isNumber))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">-- _.print(_.every({1, 2, 3, 4, 5, 6}, _.isNumber))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] predicate The function invoked per iteration
+</span><a id="864"></a><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span>_.every = <span class="keyword">function</span> (collection, predicate, selfArg)
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        <span class="keyword">if</span> <span class="keyword">not</span> callIteratee(predicate, selfArg, v, k, collection) <span class="keyword">then</span>
+            <span class="keyword">return</span> <span class="keyword">false</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> <span class="keyword">true</span>
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> filter = <span class="keyword">function</span>(collection, predicate, selfArg, reject)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        <span class="keyword">local</span> check = callIteratee(predicate, selfArg, v, k, collection)
+        <span class="keyword">if</span> reject <span class="keyword">then</span>
+            <span class="keyword">if</span> <span class="keyword">not</span> check <span class="keyword">then</span>
+                _.push(t, v)
+            <span class="keyword">end</span>
+        <span class="keyword">else</span>
+            <span class="keyword">if</span> check <span class="keyword">then</span>
+                _.push(t, v)
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Iterates over elements of collection, returning an array of all
+</span><span class="comment">-- elements predicate returns truthy for. The predicate is bound to
+</span><span class="comment">-- selfArg and invoked with three arguments: (value, index|key, collection).
+</span><span class="comment">-- @usage _.print(_.filter({1, 2, 3, 4, '5', 6, '7'}, _.isNumber))
+</span><span class="comment">-- --&gt; {1, 2, 3, 4, 6}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] predicate The function invoked per iteration
+</span><a id="900"></a><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span>_.filter = <span class="keyword">function</span> (collection, predicate, selfArg)
+    <span class="keyword">return</span> filter(collection, predicate, selfArg)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Iterates over elements of collection invoking iteratee for each element.
+</span><span class="comment">-- The iteratee is bound to selfArg and invoked with three arguments:
+</span><span class="comment">-- (value, index|key, collection). Iteratee functions may exit iteration
+</span><span class="comment">-- early by explicitly returning false.
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] predicate The function invoked per iteration
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="914"></a><span class="comment">-- @return Returns collection.
+</span>_.forEach = <span class="keyword">function</span> (collection, predicate, selfArg)
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        callIteratee(predicate, selfArg, v, k, collection)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> collection
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- This method is like [_.forEach](#_.forEach) except that it iterates
+</span><span class="comment">-- over elements of collection from right to left.
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] predicate The function invoked per iteration
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="929"></a><span class="comment">-- @return Returns collection.
+</span>_.forEachRight = <span class="keyword">function</span> (collection, predicate, selfArg)
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iterRight(collection) <span class="keyword">do</span>
+        callIteratee(predicate, selfArg, v, k, collection)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> collection
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if target is in collection.
+</span><span class="comment">-- @usage print(_.includes({1, 2, 'x', 3, ['5']=4, x=3, 5}, 'x'))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- print(_.includes({1, 2, 'x', 3, ['5']=4, x=3, 5}, 'z'))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">-- @param collection The collection to search
+</span><a id="944"></a><span class="comment">-- @param target The value to search for.
+</span>_.includes = <span class="keyword">function</span> (collection, target)
+    <span class="keyword">local</span> result = _.find(collection, <span class="keyword">function</span> (n)
+        <span class="keyword">return</span> n == target
+    <span class="keyword">end</span>)
+    <span class="keyword">return</span> result ~= <span class="keyword">nil</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Invokes method of each element in collection, returning an array of the
+</span><span class="comment">-- results of each invoked method. Any additional arguments are provided
+</span><span class="comment">-- to each invoked method. func bound to, each element in collection.
+</span><span class="comment">-- @usage _.print(_.invoke({'1.first', '2.second', '3.third'}, string.sub, 1, 1))
+</span><span class="comment">-- --&gt; {"1", "2", "3"}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over.
+</span><span class="comment">-- @param method The method to invoke per iteration.
+</span><span class="comment">-- @param ... The arguments to invoke the method with.
+</span><a id="962"></a><span class="comment">-- @return Returns the array of results.
+</span>_.invoke = <span class="keyword">function</span> (collection, method, ...)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        _.push(t, callIteratee(method, v, ...))
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array of values by running each element in collection through
+</span><span class="comment">-- iteratee. The iteratee is bound to selfArg and invoked with three
+</span><span class="comment">-- arguments: (value, index|key, collection).
+</span><span class="comment">-- @usage _.print(_.map({1, 2, 3, 4, 5, 6, 7, 8, 9}, function(n)
+</span><span class="comment">--     return n * n
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {1, 4, 9, 16, 25, 36, 49, 64, 81}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] iteratee The function invoked per iteration
+</span><a id="982"></a><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span>_.map = <span class="keyword">function</span> (collection, iteratee, selfArg)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        t[k] = callIteratee(iteratee, selfArg, v, k, collection)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array of elements split into two groups, the first of
+</span><span class="comment">-- which contains elements predicate returns truthy for, while the second
+</span><span class="comment">-- of which contains elements predicate returns falsey for. The predicate
+</span><span class="comment">-- is bound to selfArg and invoked with three arguments:
+</span><span class="comment">-- (value, index|key, collection).
+</span><span class="comment">-- @usage _.print(_.partition({1, 2, 3, 4, 5, 6, 7}, function (n)
+</span><span class="comment">--     return n &gt; 3
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {{4, 5, 6, 7}, {1, 2, 3}}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] predicate The function invoked per iteration
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="1005"></a><span class="comment">-- @return  Returns the array of grouped elements.
+</span>_.partition = <span class="keyword">function</span> (collection, predicate, selfArg)
+    <span class="keyword">local</span> t = {{}, {}}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        <span class="keyword">if</span> callIteratee(predicate, selfArg, v, k, collection) <span class="keyword">then</span>
+            _.push(t[<span class="number">1</span>], v)
+        <span class="keyword">else</span>
+            _.push(t[<span class="number">2</span>], v)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Gets the property value of path from all elements in collection.
+</span><span class="comment">-- @usage local users = {
+</span><span class="comment">--   { user = 'barney', age = 36, child = {age = 5}},
+</span><span class="comment">--   { user = 'fred',   age = 40, child = {age = 6} }
+</span><span class="comment">-- }
+</span><span class="comment">-- _.print(_.pluck(users, {'user'}))
+</span><span class="comment">-- --&gt; {"barney", "fred"}
+</span><span class="comment">-- _.print(_.pluck(users, {'child', 'age'}))
+</span><span class="comment">-- --&gt; {5, 6}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over.
+</span><a id="1030"></a><span class="comment">-- @param path The path of the property to pluck.
+</span>_.pluck = <span class="keyword">function</span> (collection, path)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, value <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        _.push(t, _.get(value, path))
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Reduces collection to a value which is the accumulated result of
+</span><span class="comment">-- running each element in collection through iteratee, where each
+</span><span class="comment">-- successive invocation is supplied the return value of the previous.
+</span><span class="comment">-- If accumulator is not provided the first element of collection is used
+</span><span class="comment">--  as the initial value. The iteratee is bound to selfArg and invoked
+</span><span class="comment">-- with four arguments: (accumulator, value, index|key, collection).
+</span><span class="comment">-- @usage _.print(_.reduce({1, 2, 3}, function(total, n)
+</span><span class="comment">--   return n + total;
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; 6
+</span><span class="comment">-- _.print(_.reduce({a = 1, b = 2}, function(result, n, key)
+</span><span class="comment">--     result[key] = n * 3
+</span><span class="comment">--     return result;
+</span><span class="comment">-- end, {}))
+</span><span class="comment">-- --&gt; {["a"]=3, ["b"]=6}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over.
+</span><span class="comment">-- @param[opt=_.identity] iteratee The function invoked per iteration.
+</span><span class="comment">-- @param[opt=&lt;first element&gt;] accumulator The initial value.
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="1061"></a><span class="comment">-- @return Returns the accumulated value.
+</span>_.reduce = <span class="keyword">function</span> (collection, iteratee, accumulator, selfArg)
+    <span class="keyword">local</span> accumulator = accumulator
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        <span class="keyword">if</span> _.isNil(accumulator) <span class="keyword">then</span>
+            accumulator = v
+        <span class="keyword">else</span>
+            accumulator =  callIteratee(iteratee, selfArg, accumulator, v, k, collection)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> accumulator
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- This method is like _.reduce except that it iterates over elements
+</span><span class="comment">-- of collection from right to left.
+</span><span class="comment">-- @usage local array = {0, 1, 2, 3, 4, 5};
+</span><span class="comment">-- _.print(_.reduceRight(array, function(str, other)
+</span><span class="comment">--   return str .. other
+</span><span class="comment">-- end, ''))
+</span><span class="comment">-- --&gt; 543210
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over.
+</span><span class="comment">-- @param[opt=_.identity] iteratee The function invoked per iteration.
+</span><span class="comment">-- @param[opt=&lt;first element&gt;] accumulator The initial value.
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="1087"></a><span class="comment">-- @return Returns the accumulated value.
+</span>_.reduceRight = <span class="keyword">function</span> (collection, iteratee, accumulator, selfArg)
+    <span class="keyword">local</span> accumulator = accumulator
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iterRight(collection) <span class="keyword">do</span>
+        <span class="keyword">if</span> _.isNil(accumulator) <span class="keyword">then</span>
+            accumulator = v
+        <span class="keyword">else</span>
+            accumulator =  callIteratee(iteratee, selfArg, accumulator, v, k, collection)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> accumulator
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- The opposite of [_.filter](#_.filter); this method returns the elements of
+</span><span class="comment">-- collection that predicate does not return truthy for.
+</span><span class="comment">-- @usage _.print(_.reject({1, 2, 3, 4, '5', 6, '7'}, _.isNumber))
+</span><span class="comment">-- --&gt; {"5", "7"}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] predicate The function invoked per iteration
+</span><a id="1108"></a><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span>_.reject = <span class="keyword">function</span> (collection, predicate, selfArg)
+    <span class="keyword">return</span> filter(collection, predicate, selfArg, <span class="keyword">true</span>)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Gets a random element or n random elements from a collection.
+</span><span class="comment">-- @usage _.print(_.sample({1, 2, 3, a=4, b='x', 5, 23, 24}, 4))
+</span><span class="comment">-- --&gt; {5, "x", 1, 23}
+</span><span class="comment">-- _.print(_.sample({1, 2, 3, a=4, b='x', 5, 23, 24}))
+</span><span class="comment">-- --&gt; 4
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to sample.
+</span><span class="comment">-- @param[opt=1] n The number of elements to sample.
+</span><a id="1122"></a><span class="comment">-- @return Returns the random sample(s).
+</span>_.sample = <span class="keyword">function</span> (collection, n)
+    <span class="keyword">local</span> n = n <span class="keyword">or</span> <span class="number">1</span>
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">local</span> keys = _.keys(collection)
+    <span class="keyword">for</span> i=<span class="number">1</span>, n <span class="keyword">do</span>
+        <span class="keyword">local</span> pick = keys[_.random(<span class="number">1</span>, #keys)]
+        _.push(t, _.get(collection, {pick}))
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> #t == <span class="number">1</span> <span class="keyword">and</span> t[<span class="number">1</span>] <span class="keyword">or</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Gets the size of collection by returning its length for array-like
+</span><span class="comment">-- values or the number of own enumerable properties for objects.
+</span><span class="comment">-- @usage _.print(_.size({'abc', 'def'}))
+</span><span class="comment">-- --&gt; 2
+</span><span class="comment">-- _.print(_.size('abcdefg'))
+</span><span class="comment">-- --&gt; 7
+</span><span class="comment">-- _.print(_.size({a=1, b=2,c=3}))
+</span><span class="comment">-- --&gt; 3
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to inspect.
+</span><a id="1145"></a><span class="comment">-- @return Returns the size of collection.
+</span>_.size = <span class="keyword">function</span> (collection)
+    <span class="keyword">local</span> c = <span class="number">0</span>
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        c = c + <span class="number">1</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> c
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if predicate returns truthy for any element of collection.
+</span><span class="comment">-- The function returns as soon as it finds a passing value and does
+</span><span class="comment">-- not iterate over the entire collection. The predicate is bound to
+</span><span class="comment">-- selfArg and invoked with three arguments: (value, index|key, collection).
+</span><span class="comment">--
+</span><span class="comment">-- @usage _.print(_.some({1, 2, 3, 4, 5, 6}, _.isString))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">-- _.print(_.some({1, 2, 3, 4, '5', 6}, _.isString))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- @param collection The collection to iterate over. (table|string)
+</span><span class="comment">-- @param[opt=_.identity] predicate The function invoked per iteration
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="1167"></a><span class="comment">-- @return Returns true if any element passes the predicate check, else false.
+</span>_.some = <span class="keyword">function</span> (collection, predicate, selfArg)
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        <span class="keyword">if</span> callIteratee(predicate, selfArg, v, k, collection) <span class="keyword">then</span>
+            <span class="keyword">return</span> <span class="keyword">true</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> <span class="keyword">false</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array of elements, sorted in ascending order by the
+</span><span class="comment">-- results of running each element in a collection through iteratee.
+</span><span class="comment">-- The iteratee is bound to selfArg and
+</span><span class="comment">-- invoked with three arguments: (value, index|key, collection).
+</span><span class="comment">-- @usage local t = {1, 2, 3}
+</span><span class="comment">-- _.print(_.sortBy(t, function (a)
+</span><span class="comment">--     return math.sin(a)
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {1, 3, 2}
+</span><span class="comment">-- local users = {
+</span><span class="comment">--     { user='fred' },
+</span><span class="comment">--     { user='alex' },
+</span><span class="comment">--     { user='zoee' },
+</span><span class="comment">--     { user='john' },
+</span><span class="comment">-- }
+</span><span class="comment">-- _.print(_.sortBy(users, function (a)
+</span><span class="comment">--     return a.user
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {{["user"]="alex"}, {["user"]="fred"}, {["user"]="john"}, {["user"]="zoee"}}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to iterate over.
+</span><span class="comment">-- @param[opt=_.identity] predicate The function invoked per iteration
+</span><span class="comment">-- @param[opt] selfArg The self binding of predicate.
+</span><a id="1201"></a><span class="comment">-- @return  Returns the new sorted array.
+</span>_.sortBy = <span class="keyword">function</span> (collection, predicate, selfArg)
+    <span class="keyword">local</span> t ={}
+    <span class="keyword">local</span> empty = <span class="keyword">true</span>
+    <span class="keyword">local</span> previous
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        <span class="keyword">if</span> empty <span class="keyword">then</span>
+            _.push(t, v)
+            previous = callIteratee(predicate, selfArg, v, k, collection)
+            empty = <span class="keyword">false</span>
+        <span class="keyword">else</span>
+            <span class="keyword">local</span> r = callIteratee(predicate, selfArg, v, k, collection)
+            <span class="keyword">if</span> _.lt(previous, r) <span class="keyword">then</span>
+                <span class="global">table</span>.insert(t, v)
+                previous = r
+            <span class="keyword">else</span>
+                <span class="global">table</span>.insert(t, #t, v)
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Iterates over elements of collection, returning the first element
+</span><span class="comment">-- predicate returns truthy for. The predicate is bound to selfArg and
+</span><span class="comment">-- invoked with three arguments: (value, index|key, collection).
+</span><span class="comment">-- @usage _.print(_.find({{a = 1}, {a = 2}, {a = 3}, {a = 2}, {a = 3}}, function(v)
+</span><span class="comment">--     return v.a == 3
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {[a]=3}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to search. (table|string)
+</span><span class="comment">-- @param predicate The function invoked per iteration
+</span><a id="1235"></a><span class="comment">-- @param selfArg The self binding of predicate.
+</span>_.find = <span class="keyword">function</span> (collection, predicate, selfArg)
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(collection) <span class="keyword">do</span>
+        <span class="keyword">if</span> callIteratee(predicate, selfArg, v, k, collection) <span class="keyword">then</span>
+            <span class="keyword">return</span> v
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- This method is like _.find except that it iterates over elements of
+</span><span class="comment">-- collection from right to left.
+</span><span class="comment">-- @usage _.findLast({{a = 1}, {a = 2}, {a = 3, x = 1}, {a = 2}, {a = 3, x = 2}},
+</span><span class="comment">-- function(v)
+</span><span class="comment">--     return v.a == 3
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; {[a]=3, [x]=2}
+</span><span class="comment">--
+</span><span class="comment">-- @param collection The collection to search. (table|string)
+</span><span class="comment">-- @param predicate The function invoked per iteration
+</span><a id="1255"></a><span class="comment">-- @param selfArg The self binding of predicate.
+</span>_.findLast = <span class="keyword">function</span> (collection, predicate, selfArg)
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iterRight(collection) <span class="keyword">do</span>
+        <span class="keyword">if</span> callIteratee(predicate, selfArg, v, k, collection) <span class="keyword">then</span>
+            <span class="keyword">return</span> v
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">--- Function
+</span><span class="comment">-- @section Function
+</span>
+<span class="comment">---
+</span><span class="comment">-- This method creates a function that invokes func once it’s called n
+</span><span class="comment">--  or more times.
+</span><span class="comment">-- @usage local printAfter3 = _.after(3, print)
+</span><span class="comment">-- for i = 1, 5 do
+</span><span class="comment">--    printAfter3('done', i)
+</span><span class="comment">-- end
+</span><span class="comment">-- --&gt; done 4
+</span><span class="comment">-- --&gt; done 5
+</span><span class="comment">--
+</span><span class="comment">-- @param n The number of calls before func invoked.
+</span><span class="comment">-- @param func The function to restrict.
+</span><a id="1279"></a><span class="comment">-- @return Returns the new restricted function.
+</span>_.after = <span class="keyword">function</span>(n, func)
+    <span class="keyword">local</span> i = <span class="number">1</span>
+    <span class="keyword">return</span> <span class="keyword">function</span>(...)
+        <span class="keyword">if</span> _.gt(i, n) <span class="keyword">then</span>
+            <span class="keyword">return</span> func(...)
+        <span class="keyword">end</span>
+        i = i + <span class="number">1</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a function that accepts up to n arguments ignoring any
+</span><span class="comment">-- additional arguments.
+</span><span class="comment">-- @usage local printOnly3 =_.ary(print, 3)
+</span><span class="comment">-- printOnly3(1, 2, 3, 'x', 'y', 6)
+</span><span class="comment">-- --&gt; 1    2   3
+</span><span class="comment">--
+</span><span class="comment">-- @param func The function to cap arguments for.
+</span><span class="comment">-- @param n the arity cap.
+</span><a id="1299"></a><span class="comment">-- @return Returns the new function
+</span>_.ary = <span class="keyword">function</span>(func, n)
+    <span class="keyword">return</span> <span class="keyword">function</span>(...)
+        <span class="keyword">if</span> n == <span class="number">1</span> <span class="keyword">then</span>
+            <span class="keyword">return</span> func((...))
+        <span class="keyword">else</span>
+            <span class="keyword">local</span> t = _.<span class="global">table</span>(...)
+            <span class="keyword">local</span> first = _.first(t, n)
+            <span class="keyword">return</span> func(_.args(first))
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a function that invokes func while it’s called less than n times.
+</span><span class="comment">-- Subsequent calls to the created function return the result of the
+</span><span class="comment">-- last func invocation.
+</span><span class="comment">-- @usage local printBefore3 = _.before(3, print)
+</span><span class="comment">-- for i = 1, 10 do
+</span><span class="comment">--     printBefore3(i, 'ok')
+</span><span class="comment">-- end
+</span><span class="comment">-- --&gt;  1   ok
+</span><span class="comment">-- --&gt;  2   ok
+</span><span class="comment">-- --&gt;  3   ok
+</span><span class="comment">--
+</span><span class="comment">-- @param n The number of calls at which func is no longer invoked.
+</span><span class="comment">-- @param func The function to restrict.
+</span><a id="1326"></a><span class="comment">-- @return Returns the new restriced function.
+</span>_.before = <span class="keyword">function</span> (n, func)
+    <span class="keyword">local</span> i = <span class="number">1</span>
+    <span class="keyword">local</span> result
+    <span class="keyword">return</span> <span class="keyword">function</span> (...)
+        <span class="keyword">if</span> _.lte(i, n) <span class="keyword">then</span>
+            result = func(...)
+        <span class="keyword">end</span>
+        i = i + <span class="number">1</span>
+        <span class="keyword">return</span> result
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a function that runs each argument through a corresponding
+</span><span class="comment">-- transform function.
+</span><span class="comment">-- @usage local increment = function(...)
+</span><span class="comment">--     return _.args(_.map(_.table(...), function(n)
+</span><span class="comment">--         return n + 1
+</span><span class="comment">--     end))
+</span><span class="comment">-- end
+</span><span class="comment">-- local pow = function(...)
+</span><span class="comment">--     return _.args(_.map(_.table(...), function(n)
+</span><span class="comment">--         return n * n
+</span><span class="comment">--     end))
+</span><span class="comment">-- end
+</span><span class="comment">-- local modded = _.modArgs(function(...)
+</span><span class="comment">--     print(...)
+</span><span class="comment">-- end, {increment, increment}, pow)
+</span><span class="comment">-- modded(0, 1, 2)
+</span><span class="comment">-- --&gt;  4   9   16
+</span><span class="comment">--
+</span><span class="comment">-- @param func The function to wrap
+</span><span class="comment">-- @param ... The functions to transform arguments, specified as
+</span><span class="comment">-- individual functions or arrays of functions.
+</span><a id="1361"></a><span class="comment">-- @return Returns the new function.
+</span>_.modArgs = <span class="keyword">function</span> (func, ...)
+    <span class="keyword">local</span> transforms = {}
+    <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="global">ipairs</span>( _.<span class="global">table</span>(...)) <span class="keyword">do</span>
+        <span class="keyword">if</span> _.isFunction(v) <span class="keyword">then</span>
+            _.push(transforms, v)
+        <span class="keyword">elseif</span> _.isTable(v) <span class="keyword">then</span>
+            <span class="keyword">for</span> k2, v2 <span class="keyword">in</span> _.iter(v) <span class="keyword">do</span>
+                <span class="keyword">if</span> _.isFunction(v2) <span class="keyword">then</span> _.push(transforms, v2) <span class="keyword">end</span>
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> <span class="keyword">function</span>(...)
+        <span class="keyword">local</span> args
+        <span class="keyword">for</span> i, transform <span class="keyword">in</span> <span class="global">ipairs</span>(transforms) <span class="keyword">do</span>
+            <span class="keyword">if</span> _.isNil(args) <span class="keyword">then</span>
+                args = _.<span class="global">table</span>(transform(...))
+            <span class="keyword">else</span>
+                args = _.<span class="global">table</span>(transform(_.args(args)))
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+        <span class="keyword">if</span> _.isNil(args) <span class="keyword">then</span>
+            <span class="keyword">return</span> func(...)
+        <span class="keyword">else</span>
+            <span class="keyword">return</span> func(_.args(args))
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a function that negates the result of the predicate func.
+</span><span class="comment">-- The func predicate is invoked with arguments of the created function.
+</span><span class="comment">-- @usage local isEven = function (n)
+</span><span class="comment">--     return n % 2 == 0
+</span><span class="comment">-- end
+</span><span class="comment">-- local isOdd = _.negate(isEven)
+</span><span class="comment">-- _.print(_.filter({1, 2, 3, 4, 5, 6}, isEven))
+</span><span class="comment">-- --&gt; {2, 4, 6}
+</span><span class="comment">-- _.print(_.filter({1, 2, 3, 4, 5, 6}, isOdd))
+</span><span class="comment">-- --&gt; {1, 3, 5}
+</span><span class="comment">--
+</span><span class="comment">-- @param func The preadicate to negate.
+</span><a id="1403"></a><span class="comment">-- @return Returns the new function
+</span>_.negate = <span class="keyword">function</span> (func)
+    <span class="keyword">return</span> <span class="keyword">function</span>(...)
+        <span class="keyword">return</span> <span class="keyword">not</span> func(...)
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a function that is restricted to invoking func once. Repeat
+</span><span class="comment">-- calls to the function return the value of the first call. The func
+</span><span class="comment">-- is invoked with arguments of the created function.
+</span><span class="comment">-- @usage local createApp = function(version)
+</span><span class="comment">--     print('App created with version '..version)
+</span><span class="comment">--     return version
+</span><span class="comment">-- end
+</span><span class="comment">-- local initialize = _.once(createApp)
+</span><span class="comment">-- initialize(1.1)
+</span><span class="comment">-- initialize(1.1)
+</span><span class="comment">-- initialize(1.1)
+</span><span class="comment">-- --&gt; App created with version 1.1
+</span><span class="comment">-- --&gt; 1.1
+</span><span class="comment">-- --&gt; 1.1
+</span><span class="comment">-- --&gt; 1.1
+</span><span class="comment">--
+</span><span class="comment">-- @param func The function to restrict.
+</span><a id="1428"></a><span class="comment">-- @return Returns the new function.
+</span>_.once = <span class="keyword">function</span> (func)
+    <span class="keyword">local</span> called = <span class="keyword">false</span>;
+    <span class="keyword">local</span> result
+    <span class="keyword">return</span> <span class="keyword">function</span>(...)
+        <span class="keyword">if</span> <span class="keyword">not</span> called <span class="keyword">then</span>
+            result = func(...)
+            called = <span class="keyword">true</span>
+        <span class="keyword">end</span>
+        <span class="keyword">return</span> result
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Creates a function that invokes func with arguments arranged according
+</span><span class="comment">-- to the specified indexes where the argument value at the first index
+</span><span class="comment">-- is provided as the first argument, the argument value at the second
+</span><span class="comment">-- index is provided as the second argument, and so on.
+</span><span class="comment">-- @usage local rearged = _.rearg(function(a, b, c)
+</span><span class="comment">--   return {a, b, c};
+</span><span class="comment">-- end, 2, 1, 3)
+</span><span class="comment">-- _.print(rearged('a', 'b', 'c'))
+</span><span class="comment">-- --&gt; {"b", "a", "c"}
+</span><span class="comment">-- _.print(rearged('b', 'a', 'c'))
+</span><span class="comment">-- --&gt; {"a", "b", "c"}
+</span><span class="comment">--
+</span><span class="comment">-- @param func The function to rearrange arguments for.
+</span><span class="comment">-- @param ... The arranged argument indexes, specified as individual
+</span><span class="comment">-- indexes or arrays of indexes.
+</span><a id="1458"></a><span class="comment">-- @return Returns the new function.
+</span>_.rearg = <span class="keyword">function</span> (func, ...)
+    <span class="keyword">local</span> indexes = {}
+    <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="global">ipairs</span>(_.<span class="global">table</span>(...)) <span class="keyword">do</span>
+        <span class="keyword">if</span> _.isNumber(v) <span class="keyword">then</span>
+            _.push(indexes, v)
+        <span class="keyword">elseif</span> _.isTable(v) <span class="keyword">then</span>
+            <span class="keyword">for</span> k2, v2 <span class="keyword">in</span> _.iter(v) <span class="keyword">do</span>
+                <span class="keyword">if</span> _.isNumber(v2) <span class="keyword">then</span> _.push(indexes, v2) <span class="keyword">end</span>
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> <span class="keyword">function</span>(...)
+        <span class="keyword">local</span> args = _.<span class="global">table</span>(...)
+        <span class="keyword">local</span> newArgs = {}
+        <span class="keyword">for</span> i, index <span class="keyword">in</span> <span class="global">ipairs</span>(indexes) <span class="keyword">do</span>
+            _.push(newArgs, args[index])
+        <span class="keyword">end</span>
+        <span class="keyword">if</span> #indexes == <span class="number">0</span> <span class="keyword">then</span>
+            <span class="keyword">return</span> func(...)
+        <span class="keyword">else</span>
+            <span class="keyword">return</span> func(_.args(newArgs))
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+
+<span class="comment">--- Lang
+</span><span class="comment">-- @section Lang
+</span><span class="comment">---
+</span>
+<span class="comment">---
+</span><span class="comment">-- Cast value to arguments
+</span><span class="comment">-- @usage print(_.args({1, 2, 3}))
+</span><span class="comment">-- --&gt; 1    2   3
+</span><span class="comment">--
+</span><span class="comment">-- @param value value to cast
+</span><a id="1496"></a><span class="comment">-- @return Returns arguments
+</span>_.args = <span class="keyword">function</span> (value)
+    <span class="keyword">if</span> _.isTable(value) <span class="keyword">then</span> <span class="keyword">return</span> <span class="global">table</span>.unpack(value)
+    <span class="keyword">else</span> <span class="keyword">return</span> <span class="global">table</span>.unpack({value})
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if value is greater than other.
+</span><span class="comment">-- @usage _.print(_.gt(1, 3))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">-- _.print(_.gt(4, 3))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">--
+</span><span class="comment">-- @param value The value to compare.
+</span><a id="1511"></a><span class="comment">-- @param other The other value to compare.
+</span>_.gt = <span class="keyword">function</span> (value, other, ...)
+    <span class="keyword">local</span> value, other = _.cast(value, other)
+    <span class="keyword">if</span> _.isString(value) <span class="keyword">or</span> _.isNumber(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> value &gt; other
+    <span class="keyword">elseif</span> _.isFunction(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> value(...) &gt; other(...)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> <span class="keyword">false</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if value is greater than other.
+</span><span class="comment">-- @usage _.print(_.gte(1, 3))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">-- _.print(_.gte(3, 3))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">--
+</span><span class="comment">-- @param value The value to compare.
+</span><a id="1530"></a><span class="comment">-- @param other The other value to compare.
+</span>_.gte = <span class="keyword">function</span> (value, other, ...)
+    <span class="keyword">if</span> _.isNil(value) <span class="keyword">or</span> _.isBoolean(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> value == other
+    <span class="keyword">end</span>
+    <span class="keyword">local</span> value, other = _.cast(value, other)
+    <span class="keyword">if</span> _.isString(value) <span class="keyword">or</span> _.isNumber(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> value &gt;= other
+    <span class="keyword">elseif</span> _.isFunction(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> value(...) &gt;= other(...)
+    <span class="keyword">elseif</span> _.isTable(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> _.eq(value, other)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> <span class="keyword">false</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if value is classified as a boolean primitive.
+</span><span class="comment">-- @usage _.print(_.isBoolean(false))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- _.print(_.isBoolean('x'))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">--
+</span><span class="comment">-- @param value the value to check
+</span><a id="1554"></a><span class="comment">-- @return Returns true if value is correctly classified, else false.
+</span>_.isBoolean = <span class="keyword">function</span>(value)
+    <span class="keyword">return</span> <span class="global">type</span>(value) == <span class="string">'boolean'</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if value is empty. A value is considered empty unless it’s an
+</span><span class="comment">-- arguments table, array, string with a length greater than 0 or an
+</span><span class="comment">--object with own enumerable properties.
+</span><span class="comment">--@usage _.print(_.isEmpty(true))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- _.print(_.isEmpty(1))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- _.print(_.isEmpty({1, 2, 3}))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">-- _.print(_.isEmpty({a= 1}))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">--
+</span><span class="comment">-- @param value The value to inspect.
+</span><a id="1573"></a><span class="comment">-- @return Returns true if value is empty, else false.
+</span>_.isEmpty = <span class="keyword">function</span> (value)
+    <span class="keyword">if</span> _.isString(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> #value == <span class="number">0</span>
+    <span class="keyword">elseif</span> _.isTable(value) <span class="keyword">then</span>
+        <span class="keyword">local</span> i = <span class="number">0</span>
+        <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(value) <span class="keyword">do</span>
+            i = i + <span class="number">1</span>
+        <span class="keyword">end</span>
+        <span class="keyword">return</span> i == <span class="number">0</span>
+    <span class="keyword">else</span>
+        <span class="keyword">return</span> <span class="keyword">true</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if value is classified as a function primitive.
+</span><span class="comment">-- @usage _.print(_.isFunction(function() end))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- _.print(_.isFunction(1))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">--
+</span><span class="comment">-- @param value the value to check
+</span><a id="1596"></a><span class="comment">-- @return Returns true if value is correctly classified, else false.
+</span>_.isFunction = <span class="keyword">function</span>(value)
+    <span class="keyword">return</span> <span class="global">type</span>(value) == <span class="string">'function'</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if value is classified as a nil primitive.
+</span><span class="comment">-- @usage _.print(_.isNil(variable)
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- variable = 1
+</span><span class="comment">-- _.print(_.isNil(variable))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">--
+</span><span class="comment">-- @param value the value to check
+</span><a id="1610"></a><span class="comment">-- @return Returns true if value is correctly classified, else false.
+</span>_.isNil = <span class="keyword">function</span>(value)
+    <span class="keyword">return</span> <span class="global">type</span>(value) == <span class="string">'nil'</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if value is classified as a number primitive.
+</span><span class="comment">-- @usage _.print(_.isNumber(1))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- _.print(_.isNumber('1'))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">--
+</span><span class="comment">-- @param value the value to check
+</span><a id="1623"></a><span class="comment">-- @return Returns true if value is correctly classified, else false.
+</span>_.isNumber = <span class="keyword">function</span>(value)
+    <span class="keyword">return</span> <span class="global">type</span>(value) == <span class="string">'number'</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if value is classified as a string primitive.
+</span><span class="comment">-- @usage _.print(_.isString('1'))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- _.print(_.isString(1))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">--
+</span><span class="comment">-- @param value the value to check
+</span><a id="1636"></a><span class="comment">-- @return Returns true if value is correctly classified, else false.
+</span>_.isString = <span class="keyword">function</span>(value)
+    <span class="keyword">return</span> <span class="global">type</span>(value) == <span class="string">'string'</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if value is classified as a table primitive.
+</span><span class="comment">-- @usage _.print(_.isTable({'1'}))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- _.print(_.isString(1))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">--
+</span><span class="comment">-- @param value the value to check
+</span><a id="1649"></a><span class="comment">-- @return Returns true if value is correctly classified, else false.
+</span>_.isTable = <span class="keyword">function</span>(value)
+    <span class="keyword">return</span> <span class="global">type</span>(value) == <span class="string">'table'</span>
+<span class="keyword">end</span>
+
+<span class="comment">-- local implicitCast function (...)
+</span><span class="comment">--     if
+</span><span class="comment">-- end
+</span>
+<span class="comment">---
+</span><span class="comment">-- Checks if value is less than other.
+</span><span class="comment">-- @usage _.print(_.lt(1, 3))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- _.print(_.lt(3, 3))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">--
+</span><span class="comment">-- @param value The value to compare.
+</span><a id="1666"></a><span class="comment">-- @param other The other value to compare.
+</span>_.lt = <span class="keyword">function</span> (value, other, ...)
+    <span class="keyword">local</span> value, other = _.cast(value, other)
+    <span class="keyword">if</span> _.isString(value) <span class="keyword">or</span> _.isNumber(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> value &lt; other
+    <span class="keyword">elseif</span> _.isFunction(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> value(...) &lt; other(...)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> <span class="keyword">false</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if value is less than or euqal to other.
+</span><span class="comment">-- @usage _.print(_.lt(4, 3))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">-- _.print(_.lt(3, 3))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- @param value The value to compare.
+</span><a id="1684"></a><span class="comment">-- @param other The other value to compare.
+</span>_.lte = <span class="keyword">function</span> (value, other, ...)
+    <span class="keyword">if</span> _.isNil(value) <span class="keyword">or</span> _.isBoolean(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> value == other
+    <span class="keyword">end</span>
+    <span class="keyword">local</span> value, other = _.cast(value, other)
+    <span class="keyword">if</span> _.isString(value) <span class="keyword">or</span> _.isNumber(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> value &lt;= other
+    <span class="keyword">elseif</span> _.isFunction(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> value(...) &lt;= other(...)
+    <span class="keyword">elseif</span> _.isTable(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> _.eq(value, other)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> <span class="keyword">false</span>
+<span class="keyword">end</span>
+
+_.cast = <span class="keyword">function</span> (a, b)
+    <span class="keyword">if</span> <span class="global">type</span>(a) == <span class="global">type</span>(b) <span class="keyword">then</span> <span class="keyword">return</span> a, b <span class="keyword">end</span>
+    <span class="keyword">local</span> cast
+    <span class="keyword">if</span> _.isString(a) <span class="keyword">then</span> cast = _.str
+    <span class="keyword">elseif</span> _.isBoolean(a) <span class="keyword">then</span> cast = _.bool
+    <span class="keyword">elseif</span> _.isNumber(a) <span class="keyword">then</span> cast = _.num
+    <span class="keyword">elseif</span> _.isFunction(a) <span class="keyword">then</span> cast = _.func
+    <span class="keyword">elseif</span> _.isTable(a) <span class="keyword">then</span> cast = _.<span class="global">table</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> a, cast(b)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Cast parameters to a function that return passed parameters.
+</span><span class="comment">-- @usage local f = _.func(1, 2, 3)
+</span><span class="comment">-- _.print(f())
+</span><span class="comment">-- --&gt; 1    2   3
+</span><span class="comment">--
+</span><span class="comment">-- @param value value to cast
+</span><span class="comment">-- @param ... The parameters to pass to any detected function
+</span><a id="1720"></a><span class="comment">-- @return casted value
+</span>_.func = <span class="keyword">function</span> (...)
+    <span class="keyword">local</span> t = _.<span class="global">table</span>(...)
+    <span class="keyword">return</span> <span class="keyword">function</span> ()
+        <span class="keyword">return</span> _.args(t)
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Cast parameters to table using table.pack
+</span><span class="comment">-- @usage print(_.table(1, 2, 3))
+</span><span class="comment">-- --&gt; {1, 2, 3}
+</span><span class="comment">-- print(_.table("123"))
+</span><span class="comment">-- --&gt; {"123"}
+</span><span class="comment">-- print(_.table(0))
+</span><span class="comment">-- --&gt; {0}
+</span><span class="comment">--
+</span><span class="comment">-- @param value value to cast
+</span><span class="comment">-- @param ... The parameters to pass to any detected function
+</span><a id="1739"></a><span class="comment">-- @return casted value
+</span>_.<span class="global">table</span> = <span class="keyword">function</span> (...)
+    <span class="keyword">return</span> <span class="global">table</span>.pack(...)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Cast anything to boolean. If any function detected, call and cast its
+</span><span class="comment">-- result. Return false for 0, nil, table and empty string.
+</span><span class="comment">-- @usage print(_.bool({1, 2, 3}))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">-- print(_.bool("123"))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">-- print(_.bool(0))
+</span><span class="comment">-- --&gt; false
+</span><span class="comment">-- print(_.bool(function(a) return a end, "555"))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">--
+</span><span class="comment">-- @param value value to cast
+</span><span class="comment">-- @param ... The parameters to pass to any detected function
+</span><a id="1758"></a><span class="comment">-- @return casted value
+</span>_.bool = <span class="keyword">function</span> (value, ...)
+    <span class="keyword">local</span> bool = <span class="keyword">false</span>
+    <span class="keyword">if</span> _.isString(value) <span class="keyword">then</span>
+        bool = #value &gt; <span class="number">0</span>
+    <span class="keyword">elseif</span> _.isBoolean(value) <span class="keyword">then</span>
+        bool = value
+    <span class="keyword">elseif</span> _.isNumber(value) <span class="keyword">then</span>
+        bool = value ~= <span class="number">0</span>
+    <span class="keyword">elseif</span> _.isFunction(value) <span class="keyword">then</span>
+        bool = _.bool(value(...))
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> bool
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Cast anything to number. If any function detected, call and cast its
+</span><span class="comment">-- result. Return 0 for nil and table.
+</span><span class="comment">-- @usage print(_.num({1, 2, 3}))
+</span><span class="comment">-- --&gt; 0
+</span><span class="comment">-- print(_.num("123"))
+</span><span class="comment">-- --&gt; 123
+</span><span class="comment">-- print(_.num(true))
+</span><span class="comment">-- --&gt; 1
+</span><span class="comment">-- print(_.num(function(a) return a end, "555"))
+</span><span class="comment">-- --&gt; 555
+</span><span class="comment">--
+</span><span class="comment">-- @param value value to cast
+</span><span class="comment">-- @param ... The parameters to pass to any detected function
+</span><a id="1787"></a><span class="comment">-- @return casted value
+</span>_.num = <span class="keyword">function</span> (value, ...)
+    <span class="keyword">local</span> num = <span class="number">0</span>
+    <span class="keyword">if</span> _.isString(value) <span class="keyword">then</span>
+        ok = <span class="global">pcall</span>(<span class="keyword">function</span>()
+            num = value + <span class="number">0</span>
+        <span class="keyword">end</span>)
+        <span class="keyword">if</span> <span class="keyword">not</span> ok <span class="keyword">then</span>
+            num = <span class="global">math</span>.huge
+        <span class="keyword">end</span>
+    <span class="keyword">elseif</span> _.isBoolean(value) <span class="keyword">then</span>
+        num = value <span class="keyword">and</span> <span class="number">1</span> <span class="keyword">or</span> <span class="number">0</span>
+    <span class="keyword">elseif</span> _.isNumber(value) <span class="keyword">then</span>
+        num = value
+    <span class="keyword">elseif</span> _.isFunction(value) <span class="keyword">then</span>
+        num = _.num(value(...))
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> num
+<span class="keyword">end</span>
+
+
+<span class="keyword">local</span> dblQuote = <span class="keyword">function</span> (v)
+    <span class="keyword">return</span> <span class="string">'"'</span>..v..<span class="string">'"'</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Cast anything to string. If any function detected, call and cast its
+</span><span class="comment">-- result.
+</span><span class="comment">-- @usage print(_.str({1, 2, 3, 4, {k=2, {'x', 'y'}}}))
+</span><span class="comment">-- --&gt; {1, 2, 3, 4, {{"x", "y"}, ["k"]=2}}
+</span><span class="comment">-- print(_.str({1, 2, 3, 4, function(a) return a end}, 5))
+</span><span class="comment">-- --&gt; {1, 2, 3, 4, 5}
+</span><span class="comment">--
+</span><span class="comment">-- @param value value to cast
+</span><span class="comment">-- @param ... The parameters to pass to any detected function
+</span><a id="1822"></a><span class="comment">-- @return casted value
+</span>_.str = <span class="keyword">function</span> (value, ...)
+    <span class="keyword">local</span> str = <span class="string">''</span>;
+    <span class="comment">-- local v;
+</span>    <span class="keyword">if</span> _.isString(value) <span class="keyword">then</span>
+        str = value
+    <span class="keyword">elseif</span> _.isBoolean(value) <span class="keyword">then</span>
+        str = value <span class="keyword">and</span> <span class="string">'true'</span> <span class="keyword">or</span> <span class="string">'false'</span>
+    <span class="keyword">elseif</span> _.isNil(value) <span class="keyword">then</span>
+        str = <span class="string">'nil'</span>
+    <span class="keyword">elseif</span> _.isNumber(value) <span class="keyword">then</span>
+        str = value .. <span class="string">''</span>
+    <span class="keyword">elseif</span> _.isFunction(value) <span class="keyword">then</span>
+        str = _.str(value(...))
+    <span class="keyword">elseif</span> _.isTable(value) <span class="keyword">then</span>
+        str = <span class="string">'{'</span>
+        <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(value) <span class="keyword">do</span>
+            v = _.isString(v) <span class="keyword">and</span> dblQuote(v) <span class="keyword">or</span> _.str(v, ...)
+            <span class="keyword">if</span> _.isNumber(k) <span class="keyword">then</span>
+                str = str .. v .. <span class="string">', '</span>
+            <span class="keyword">else</span>
+                str = str .. <span class="string">'['</span> .. dblQuote(k) .. <span class="string">']='</span> .. v .. <span class="string">', '</span>
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+        str = str:sub(<span class="number">0</span>, #str - <span class="number">2</span>) .. <span class="string">'}'</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> str
+<span class="keyword">end</span>
+
+
+<span class="comment">--- Number
+</span><span class="comment">-- @section Number
+</span>
+<span class="comment">---
+</span><span class="comment">-- Checks if n is between start and up to but not including, end.
+</span><span class="comment">-- If end is not specified it’s set to start with start then set to 0.
+</span><span class="comment">-- @usage print(_.inRange(-3, -4, 8))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">--
+</span><span class="comment">-- @param n The number to check.
+</span><span class="comment">-- @param start The start of the range.
+</span><span class="comment">-- @param stop The end of the range.
+</span><a id="1864"></a><span class="comment">-- @return Returns true if n is in the range, else false.
+</span>_.inRange = <span class="keyword">function</span> (n, start, stop)
+    <span class="keyword">local</span> _start = _.isNil(stop) <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> start <span class="keyword">or</span> <span class="number">0</span>
+    <span class="keyword">local</span> _stop = _.isNil(stop) <span class="keyword">and</span> start <span class="keyword">or</span> stop <span class="keyword">or</span> <span class="number">1</span>
+    <span class="keyword">return</span> n &gt;= _start <span class="keyword">and</span> n &lt; _stop
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Produces a random number between min and max (inclusive).
+</span><span class="comment">-- If only one argument is provided a number between 0 and the given
+</span><span class="comment">-- number is returned. If floating is true, a floating-point number is
+</span><span class="comment">-- returned instead of an integer.
+</span><span class="comment">-- @usage _.print(_.random())
+</span><span class="comment">-- --&gt; 1
+</span><span class="comment">-- _.print(_.random(5))
+</span><span class="comment">-- --&gt; 3
+</span><span class="comment">-- _.print(_.random(5, 10, true))
+</span><span class="comment">-- --&gt; 8.8120200577248
+</span><span class="comment">--
+</span><span class="comment">-- @param[opt=0] min the minimum possible value.
+</span><span class="comment">-- @param[opt=1] max the maximum possible value.
+</span><span class="comment">-- @param[opt=false] floating Specify returning a floating-point number.
+</span><a id="1886"></a><span class="comment">-- @return Returns the random number.
+</span>_.random = <span class="keyword">function</span> (min, max, floating)
+    <span class="keyword">local</span> minim = _.isNil(max) <span class="keyword">and</span> <span class="number">0</span> <span class="keyword">or</span> min <span class="keyword">or</span> <span class="number">0</span>
+    <span class="keyword">local</span> maxim = _.isNil(max) <span class="keyword">and</span> min <span class="keyword">or</span> max <span class="keyword">or</span> <span class="number">1</span>
+    <span class="global">math</span>.randomseed(<span class="global">os</span>.clock() * <span class="global">math</span>.random(<span class="global">os</span>.time()))
+    <span class="keyword">local</span> r = <span class="global">math</span>.random(minim, maxim)
+    <span class="keyword">if</span> floating <span class="keyword">then</span>
+        r = r + <span class="global">math</span>.random()
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> r
+<span class="keyword">end</span>
+
+<span class="comment">--- Object
+</span><span class="comment">-- @section Object
+</span>
+<span class="comment">---
+</span><span class="comment">-- Gets the property value at path of object. If the resolved value
+</span><span class="comment">-- is nil the defaultValue is used in its place.
+</span><span class="comment">-- @usage local object = {a={b={c={d=5}}}}
+</span><span class="comment">-- _.print(_.get(object, {'a', 'b', 'c', 'd'}))
+</span><span class="comment">-- --&gt; 5
+</span><span class="comment">--
+</span><span class="comment">-- @param object The object to query.
+</span><span class="comment">-- @param path The path of the property to get.
+</span><span class="comment">-- @param[opt=nil] defaultValue The value returned if the resolved value is nil.
+</span><a id="1911"></a><span class="comment">-- @return Returns the resolved value.
+</span>_.get = <span class="keyword">function</span> (object, path, defaultValue)
+    <span class="keyword">if</span> _.isTable(object) <span class="keyword">then</span>
+        <span class="keyword">local</span> value = object
+        <span class="keyword">local</span> c = <span class="number">1</span>
+        <span class="keyword">while</span> <span class="keyword">not</span> _.isNil(path[c]) <span class="keyword">do</span>
+            <span class="keyword">if</span> <span class="keyword">not</span> _.isTable(value) <span class="keyword">then</span> <span class="keyword">return</span> defaultValue <span class="keyword">end</span>
+            value = value[path[c]]
+            c = c + <span class="number">1</span>
+        <span class="keyword">end</span>
+        <span class="keyword">return</span> value <span class="keyword">or</span> defaultValue
+    <span class="keyword">elseif</span> _.isString(object) <span class="keyword">then</span>
+        <span class="keyword">local</span> index = path[<span class="number">1</span>]
+        <span class="keyword">return</span> object:sub(index, index)
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Checks if path is a direct property.
+</span><span class="comment">-- @usage local object = {a={b={c={d}}}}
+</span><span class="comment">-- print(_.has(object, {'a', 'b', 'c'}))
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">--
+</span><span class="comment">-- @param object The object to query
+</span><a id="1935"></a><span class="comment">-- @param path The path to check (Array)
+</span>_.has = <span class="keyword">function</span> (object, path)
+    <span class="keyword">local</span> obj = object
+    <span class="keyword">local</span> c = <span class="number">1</span>
+    <span class="keyword">local</span> exist = <span class="keyword">true</span>
+    <span class="keyword">while</span> <span class="keyword">not</span> _.isNil(path[c]) <span class="keyword">do</span>
+        obj = obj[path[c]]
+        <span class="keyword">if</span> _.isNil(obj) <span class="keyword">then</span>
+            exist = <span class="keyword">false</span>
+            <span class="keyword">break</span>
+        <span class="keyword">end</span>
+        c = c + <span class="number">1</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> exist
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- This method is like _.find except that it returns the key of the
+</span><span class="comment">-- first element predicate returns truthy for instead of the element itself.
+</span><span class="comment">-- @usage _.print(_.findKey({a={a = 1}, b={a = 2}, c={a = 3, x = 1}},
+</span><span class="comment">-- function(v)
+</span><span class="comment">--     return v.a == 3
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; c
+</span><span class="comment">--
+</span><span class="comment">-- @param object The collection to search. (table|string)
+</span><span class="comment">-- @param predicate The function invoked per iteration
+</span><span class="comment">-- @param selfArg The self binding of predicate.
+</span><a id="1963"></a><span class="comment">-- @return Returns the key of the matched element, else nil
+</span>_.findKey = <span class="keyword">function</span> (object, predicate, selfArg)
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(object) <span class="keyword">do</span>
+        <span class="keyword">if</span> callIteratee(predicate, selfArg, v, k, object) <span class="keyword">then</span>
+            <span class="keyword">return</span> k
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- This method is like _.find except that it returns the key of the
+</span><span class="comment">-- first element predicate returns truthy for instead of the element itself.
+</span><span class="comment">-- @usage _.print(_.findLastKey({a={a=3}, b={a = 2}, c={a=3, x = 1}},
+</span><span class="comment">-- function(v)
+</span><span class="comment">--     return v.a == 3
+</span><span class="comment">-- end))
+</span><span class="comment">-- --&gt; c
+</span><span class="comment">--
+</span><span class="comment">-- @param object The object to search. (table|string)
+</span><span class="comment">-- @param predicate The function invoked per iteration
+</span><span class="comment">-- @param selfArg The self binding of predicate.
+</span><a id="1984"></a><span class="comment">-- @return Returns the key of the matched element, else nil
+</span>_.findLastKey = <span class="keyword">function</span> (object, predicate, selfArg)
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iterRight(object) <span class="keyword">do</span>
+        <span class="keyword">if</span> callIteratee(predicate, selfArg, v, k, object) <span class="keyword">then</span>
+            <span class="keyword">return</span> k
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array of function property names from all enumerable
+</span><span class="comment">-- properties, own and inherited, of object.
+</span><span class="comment">-- @usage _.print(_.functions(table))
+</span><span class="comment">-- --&gt; {"concat", "insert", "maxn", "pack", "remove", "sort", "unpack"}
+</span><span class="comment">--
+</span><span class="comment">-- @param object The object to inspect.
+</span><a id="2000"></a><span class="comment">-- @return Returns the new array of property names.
+</span>_.functions = <span class="keyword">function</span>(object)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(object) <span class="keyword">do</span>
+        <span class="keyword">if</span> _.isFunction(v) <span class="keyword">then</span>
+            _.push(t, k)
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an object composed of the inverted keys and values of object.
+</span><span class="comment">-- If object contains duplicate values, subsequent values overwrite
+</span><span class="comment">-- property assignments of previous values unless multiValue is true.
+</span><span class="comment">-- @usage _.print(_.invert({a='1', b='2', c='3', d='3'}))
+</span><span class="comment">-- --&gt; {[2]="b", [3]="d", [1]="a"}
+</span><span class="comment">-- _.print(_.invert({a='1', b='2', c='3', d='3'}, true))
+</span><span class="comment">-- --&gt; {[2]="b", [3]={"c", "d"}, [1]="a"}
+</span><span class="comment">--
+</span><span class="comment">-- @param object The object to invert.
+</span><span class="comment">-- @param multiValue Allow multiple values per key.
+</span><a id="2022"></a><span class="comment">-- @return Returns the new inverted object.
+</span>_.invert = <span class="keyword">function</span> (object, multiValue)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(object) <span class="keyword">do</span>
+        <span class="keyword">if</span> multiValue <span class="keyword">and</span> <span class="keyword">not</span> _.isNil(t[v]) <span class="keyword">then</span>
+            t[v] = { t[v] }
+            _.push(t[v], k)
+        <span class="keyword">else</span>
+            t[v] = k
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+
+<span class="keyword">end</span>
+
+<span class="keyword">local</span> getSortedKeys = <span class="keyword">function</span>(collection, desc)
+    <span class="keyword">local</span> sortedKeys = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="global">pairs</span>(collection) <span class="keyword">do</span>
+        <span class="global">table</span>.insert(sortedKeys, k)
+    <span class="keyword">end</span>
+    <span class="keyword">if</span> desc <span class="keyword">then</span>
+        <span class="global">table</span>.sort(sortedKeys, _.gt)
+    <span class="keyword">else</span>
+        <span class="global">table</span>.sort(sortedKeys, _.lt)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> sortedKeys
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array of the own enumerable property names of object.
+</span><span class="comment">-- @usage _.print(_.keys("test"))
+</span><span class="comment">-- --&gt; {1, 2, 3, 4}
+</span><span class="comment">-- _.print(_.keys({a=1, b=2, c=3}))
+</span><span class="comment">-- --&gt; {"c", "b", "a"}
+</span><span class="comment">--
+</span><span class="comment">-- @param object The object to query. (table|string)
+</span><a id="2058"></a><span class="comment">-- @return Returns the array of property names.
+</span>_.keys = <span class="keyword">function</span> (object)
+    <span class="keyword">if</span> _.isTable(object) <span class="keyword">then</span>
+        <span class="keyword">return</span> getSortedKeys(object)
+    <span class="keyword">elseif</span> _.isString(object) <span class="keyword">then</span>
+        <span class="keyword">local</span> keys = {}
+        <span class="keyword">for</span> i=<span class="number">1</span>, #object <span class="keyword">do</span>
+            keys[i] = i
+        <span class="keyword">end</span>
+        <span class="keyword">return</span> keys
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates a two dimensional array of the key-value pairs for object.
+</span><span class="comment">-- @usage  _.print(_.pairs({1, 2, 'x', a='b'}))
+</span><span class="comment">-- --&gt; {{1, 1}, {2, 2}, {3, "x"}, {"a", "b"}}
+</span><span class="comment">--
+</span><span class="comment">-- @param object The object to query
+</span><a id="2077"></a><span class="comment">-- @return Returns the new array of key-value pairs.
+</span>_.<span class="global">pairs</span> = <span class="keyword">function</span> (object)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(object) <span class="keyword">do</span>
+        _.push(t, {k, v})
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- This method is like _.get except that if the resolved value is a
+</span><span class="comment">-- function it’s invoked with additional parameters and its result is returned.
+</span><span class="comment">-- @usage local object = {a=5, b={c=function(a) print(a) end}}
+</span><span class="comment">-- _.result(object, {'b', 'c'}, nil, 5)
+</span><span class="comment">-- --&gt; 5
+</span><span class="comment">--
+</span><span class="comment">-- @param object The object to query.
+</span><span class="comment">-- @param path The path of the property to get.
+</span><span class="comment">-- @param[opt=nil] defaultValue The value returned if the resolved value is nil.
+</span><span class="comment">-- @param ... Additional parameters to pass to function
+</span><a id="2097"></a><span class="comment">-- @return Returns the resolved value.
+</span>_.result = <span class="keyword">function</span> (object, path, defaultValue, ...)
+    <span class="keyword">local</span> result = _.get(object, path, defaultValue)
+    <span class="keyword">if</span> _.isFunction(result) <span class="keyword">then</span>
+        <span class="keyword">return</span> result(...)
+    <span class="keyword">else</span>
+        <span class="keyword">return</span> result
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array of the own enumerable property values of object.
+</span><span class="comment">-- @usage _.print(_.values("test"))
+</span><span class="comment">-- --&gt; {"t", "e", "s", "t"}
+</span><span class="comment">-- _.print(_.values({a=1, b=2, c=3}))
+</span><span class="comment">-- --&gt; {1, 3, 2}
+</span><span class="comment">--
+</span><span class="comment">-- @param object The object to query. (table|string)
+</span><a id="2116"></a><span class="comment">-- @return Returns the array of property values.
+</span>_.values = <span class="keyword">function</span> (object)
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> _.iter(object) <span class="keyword">do</span>
+        _.push(t, v)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="comment">--- String
+</span><span class="comment">-- @section String
+</span>
+
+<span class="comment">--- Utility
+</span><span class="comment">-- @section Utility
+</span>
+<span class="comment">---
+</span><span class="comment">-- Creates a function that returns value.
+</span><span class="comment">-- @usage local object = {x=5}
+</span><span class="comment">-- local getter = _.constant(object)
+</span><span class="comment">-- _.print(getter() == object);
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">--
+</span><span class="comment">-- @param value Any value.
+</span><a id="2140"></a><span class="comment">-- @return Returns the new function.
+</span>_.constant = <span class="keyword">function</span>(value)
+    <span class="keyword">return</span> _.func(value)
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- This method returns the first argument provided to it.
+</span><span class="comment">-- @usage local object = {x=5}
+</span><span class="comment">-- _.print(_.identity(object) == object);
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">--
+</span><span class="comment">-- @param value Any value.
+</span><a id="2152"></a><span class="comment">-- @return Returns value.
+</span>_.identity = <span class="keyword">function</span>(...) <span class="keyword">return</span> ... <span class="keyword">end</span>
+
+<span class="keyword">local</span> iterCollection = <span class="keyword">function</span>(<span class="global">table</span>, desc)
+    <span class="keyword">local</span> sortedKeys = getSortedKeys(<span class="global">table</span>, desc)
+    <span class="keyword">local</span> i = <span class="number">0</span>
+    <span class="keyword">return</span> <span class="keyword">function</span> ()
+        <span class="keyword">if</span> _.lt(i, #sortedKeys) <span class="keyword">then</span>
+            i = i + <span class="number">1</span>
+            <span class="keyword">local</span> key = sortedKeys[i]
+            <span class="keyword">return</span> key, <span class="global">table</span>[key]
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+_.iter = <span class="keyword">function</span>(value)
+    <span class="keyword">if</span> _.isString(value) <span class="keyword">then</span>
+        <span class="keyword">local</span> i = <span class="number">0</span>
+        <span class="keyword">return</span> <span class="keyword">function</span>()
+            <span class="keyword">if</span> _.lt(i, #value) <span class="keyword">then</span>
+                i = i + <span class="number">1</span>
+                <span class="keyword">local</span> c = value:sub(i, i)
+                <span class="keyword">return</span> i, c
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">elseif</span> _.isTable(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> iterCollection(value)
+    <span class="keyword">else</span>
+        <span class="keyword">return</span> <span class="keyword">function</span>() <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+_.iterRight = <span class="keyword">function</span>(value)
+    <span class="keyword">if</span> _.isString(value) <span class="keyword">then</span>
+        <span class="keyword">local</span> i = #value + <span class="number">1</span>
+        <span class="keyword">return</span> <span class="keyword">function</span>()
+            <span class="keyword">if</span> _.gt(i, <span class="number">1</span>) <span class="keyword">then</span>
+                i = i - <span class="number">1</span>
+                <span class="keyword">local</span> c = value:sub(i, i)
+                <span class="keyword">return</span> i, c
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">elseif</span> _.isTable(value) <span class="keyword">then</span>
+        <span class="keyword">return</span> iterCollection(value, <span class="keyword">true</span>)
+    <span class="keyword">else</span>
+        <span class="keyword">return</span> <span class="keyword">function</span>() <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- A no-operation function that returns nil regardless of the arguments
+</span><span class="comment">-- it receives.
+</span><span class="comment">-- @usage local object = {x=5}
+</span><span class="comment">-- _.print(_.noop(object) == nil);
+</span><span class="comment">-- --&gt; true
+</span><span class="comment">--
+</span><span class="comment">-- @param ... Any arguments
+</span><a id="2209"></a><span class="comment">-- @return Returns nil
+</span>_.noop = <span class="keyword">function</span>(...) <span class="keyword">return</span> <span class="keyword">nil</span> <span class="keyword">end</span>
+
+
+<span class="comment">---
+</span><span class="comment">-- Print more readable representation of arguments using _.str
+</span><span class="comment">-- @usage _.print({1, 2, 3, 4, {k=2, {'x', 'y'}}})
+</span><span class="comment">-- --&gt; {1, 2, 3, 4, {{"x", "y"}, [k]=2}}
+</span><span class="comment">--
+</span><span class="comment">-- @param ... values to print
+</span><a id="2219"></a><span class="comment">-- @return Return human readable string of the value
+</span>_.<span class="global">print</span> = <span class="keyword">function</span>(...)
+    <span class="keyword">local</span> t = _.<span class="global">table</span>(...)
+    <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="global">ipairs</span>(t) <span class="keyword">do</span>
+        t[i] = _.str(t[i])
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> <span class="global">print</span>(_.args(t))
+<span class="keyword">end</span>
+
+<span class="comment">---
+</span><span class="comment">-- Creates an array of numbers (positive and/or negative) progressing
+</span><span class="comment">-- from start up to, including, end.
+</span><span class="comment">-- If end is not specified it’s set to start with start then set to 1.
+</span><span class="comment">-- @usage _.print(_.range(5, 20, 3))
+</span><span class="comment">-- --&gt; {5, 8, 11, 14, 17, 20}
+</span><span class="comment">--
+</span><span class="comment">-- @param[opt=1] start The start of the range.
+</span><span class="comment">-- @param stop Then end of the range.
+</span><span class="comment">-- @param[opt=1] step The value to increment or decrement by
+</span><a id="2238"></a><span class="comment">-- @return Returns the new array of numbers
+</span>_.range = <span class="keyword">function</span>(start, ...)
+    <span class="keyword">local</span> start = start
+    <span class="keyword">local</span> args = _.<span class="global">table</span>(...)
+    <span class="keyword">local</span> a, b, c
+    <span class="keyword">if</span> #args == <span class="number">0</span> <span class="keyword">then</span>
+        a = <span class="number">1</span>   <span class="comment">-- according to lua
+</span>        b = start
+        c = <span class="number">1</span>
+    <span class="keyword">else</span>
+        a = start
+        b = args[<span class="number">1</span>]
+        c = args[<span class="number">2</span>] <span class="keyword">or</span> <span class="number">1</span>
+    <span class="keyword">end</span>
+    <span class="keyword">local</span> t = {}
+    <span class="keyword">for</span> i = a, b, c <span class="keyword">do</span>
+        _.push(t, i)
+    <span class="keyword">end</span>
+    <span class="keyword">return</span> t
+<span class="keyword">end</span>
+
+<span class="keyword">return</span> _</pre>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2015-08-16 20:12:50 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
