@@ -1,0 +1,3918 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>lodash.lua documentation</title>
+    <link rel="stylesheet" href="ldoc_fixed.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>lodash.lua</h1>
+
+
+
+
+<h2>Array </h2>
+<ul class="nowrap">
+    <li><a href="#_.chunk">_.chunk</a></li>
+    <li><a href="#_.compact">_.compact</a></li>
+    <li><a href="#_.difference">_.difference</a></li>
+    <li><a href="#_.drop">_.drop</a></li>
+    <li><a href="#_.dropRight">_.dropRight</a></li>
+    <li><a href="#_.dropRightWhile">_.dropRightWhile</a></li>
+    <li><a href="#_.dropWhile">_.dropWhile</a></li>
+    <li><a href="#_.fill">_.fill</a></li>
+    <li><a href="#_.findIndex">_.findIndex</a></li>
+    <li><a href="#_.findLastIndex">_.findLastIndex</a></li>
+    <li><a href="#_.first">_.first</a></li>
+    <li><a href="#_.flatten">_.flatten</a></li>
+    <li><a href="#_.flattenDeep">_.flattenDeep</a></li>
+    <li><a href="#_.indexOf">_.indexOf</a></li>
+    <li><a href="#_.initial">_.initial</a></li>
+    <li><a href="#_.intersection">_.intersection</a></li>
+    <li><a href="#_.last">_.last</a></li>
+    <li><a href="#_.lastIndexOf">_.lastIndexOf</a></li>
+    <li><a href="#_.pull">_.pull</a></li>
+    <li><a href="#_.pullAt">_.pullAt</a></li>
+    <li><a href="#_.remove">_.remove</a></li>
+    <li><a href="#_.rest">_.rest</a></li>
+    <li><a href="#_.reverse">_.reverse</a></li>
+    <li><a href="#_.slice">_.slice</a></li>
+    <li><a href="#_.take">_.take</a></li>
+    <li><a href="#_.takeRight">_.takeRight</a></li>
+    <li><a href="#_.takeRightWhile">_.takeRightWhile</a></li>
+    <li><a href="#_.takeWhile">_.takeWhile</a></li>
+    <li><a href="#_.union">_.union</a></li>
+    <li><a href="#_.uniq">_.uniq</a></li>
+    <li><a href="#_.unzip">_.unzip</a></li>
+    <li><a href="#_.without">_.without</a></li>
+    <li><a href="#_.zip">_.zip</a></li>
+    <li><a href="#_.zipObject">_.zipObject</a></li>
+</ul>
+<h2>Collection </h2>
+<ul class="nowrap">
+    <li><a href="#_.at">_.at</a></li>
+    <li><a href="#_.countBy">_.countBy</a></li>
+    <li><a href="#_.every">_.every</a></li>
+    <li><a href="#_.filter">_.filter</a></li>
+    <li><a href="#_.find">_.find</a></li>
+    <li><a href="#_.findLast">_.findLast</a></li>
+    <li><a href="#_.forEach">_.forEach</a></li>
+    <li><a href="#_.forEachRight">_.forEachRight</a></li>
+    <li><a href="#_.groupBy">_.groupBy</a></li>
+    <li><a href="#_.includes">_.includes</a></li>
+    <li><a href="#_.indexBy">_.indexBy</a></li>
+    <li><a href="#_.invoke">_.invoke</a></li>
+    <li><a href="#_.map">_.map</a></li>
+    <li><a href="#_.partition">_.partition</a></li>
+    <li><a href="#_.pluck">_.pluck</a></li>
+    <li><a href="#_.reduce">_.reduce</a></li>
+    <li><a href="#_.reduceRight">_.reduceRight</a></li>
+    <li><a href="#_.reject">_.reject</a></li>
+    <li><a href="#_.sample">_.sample</a></li>
+    <li><a href="#_.size">_.size</a></li>
+    <li><a href="#_.some">_.some</a></li>
+    <li><a href="#_.sortBy">_.sortBy</a></li>
+</ul>
+<h2>Function </h2>
+<ul class="nowrap">
+    <li><a href="#_.after">_.after</a></li>
+    <li><a href="#_.ary">_.ary</a></li>
+    <li><a href="#_.before">_.before</a></li>
+    <li><a href="#_.modArgs">_.modArgs</a></li>
+    <li><a href="#_.negate">_.negate</a></li>
+    <li><a href="#_.once">_.once</a></li>
+    <li><a href="#_.rearg">_.rearg</a></li>
+</ul>
+<h2>Lang </h2>
+<ul class="nowrap">
+    <li><a href="#_.args">_.args</a></li>
+    <li><a href="#_.bool">_.bool</a></li>
+    <li><a href="#_.func">_.func</a></li>
+    <li><a href="#_.gt">_.gt</a></li>
+    <li><a href="#_.gte">_.gte</a></li>
+    <li><a href="#_.isBoolean">_.isBoolean</a></li>
+    <li><a href="#_.isEmpty">_.isEmpty</a></li>
+    <li><a href="#_.isFunction">_.isFunction</a></li>
+    <li><a href="#_.isNil">_.isNil</a></li>
+    <li><a href="#_.isNumber">_.isNumber</a></li>
+    <li><a href="#_.isString">_.isString</a></li>
+    <li><a href="#_.isTable">_.isTable</a></li>
+    <li><a href="#_.lt">_.lt</a></li>
+    <li><a href="#_.lte">_.lte</a></li>
+    <li><a href="#_.num">_.num</a></li>
+    <li><a href="#_.str">_.str</a></li>
+    <li><a href="#_.table">_.table</a></li>
+</ul>
+<h2>Number </h2>
+<ul class="nowrap">
+    <li><a href="#_.inRange">_.inRange</a></li>
+    <li><a href="#_.random">_.random</a></li>
+</ul>
+<h2>Object </h2>
+<ul class="nowrap">
+    <li><a href="#_.findKey">_.findKey</a></li>
+    <li><a href="#_.findLastKey">_.findLastKey</a></li>
+    <li><a href="#_.functions">_.functions</a></li>
+    <li><a href="#_.get">_.get</a></li>
+    <li><a href="#_.has">_.has</a></li>
+    <li><a href="#_.invert">_.invert</a></li>
+    <li><a href="#_.keys">_.keys</a></li>
+    <li><a href="#_.pairs">_.pairs</a></li>
+    <li><a href="#_.result">_.result</a></li>
+    <li><a href="#_.values">_.values</a></li>
+</ul>
+<h2>Utility </h2>
+<ul class="nowrap">
+    <li><a href="#_.constant">_.constant</a></li>
+    <li><a href="#_.identity">_.identity</a></li>
+    <li><a href="#_.noop">_.noop</a></li>
+    <li><a href="#_.print">_.print</a></li>
+    <li><a href="#_.range">_.range</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><strong>lodash</strong></li>
+</ul>
+<h2>Source</h2>
+<ul class="$(kind=='Topics' and '' or 'nowrap'">
+  <li><a href="source/lodash.lua.html">lodash.lua</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Module <code>lodash</code></h1>
+<p>lodash for lua</p>
+<p>
+
+</p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>License</strong>: MIT</li>
+        <li><strong>Author</strong>: Ted Moghimi</li>
+    </ul>
+
+
+
+    <h2 class="section-header "><a name="Array"></a>Array </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "_.chunk"></a>
+    <strong>_.chunk</strong>
+    <a style="float:right;" href="source/lodash.lua.html#23">line 23</a>
+    </dt>
+    <dd>
+    Creates an array of elements split into groups the length of size. <br/>
+ If collection can’t be split evenly, the final chunk will be the
+ remaining elements.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to process.
+        </li>
+        <li><span class="parameter">size</span>
+         The length of each chunk.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        the new array containing chunks.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> t = _.chunk({<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="keyword">true</span> , <span class="keyword">false</span>}, <span class="number">4</span>)
+ _.<span class="global">print</span>(t)
+ <span class="comment">--&gt; {{"x", "y", "z", 1}, {2, 3, 4, true}, {false}}
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.compact"></a>
+    <strong>_.compact</strong>
+    <a style="float:right;" href="source/lodash.lua.html#50">line 50</a>
+    </dt>
+    <dd>
+    Creates an array with all falsey values removed.  The values false,
+ nil are falsey.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to compact
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of filtered values
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> t = _.compact({<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="keyword">nil</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="keyword">false</span>, <span class="keyword">true</span> , <span class="keyword">false</span>})
+ _.<span class="global">print</span>(t)
+ <span class="comment">--&gt; {"x", "y", 1, 2, 3, true}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.difference"></a>
+    <strong>_.difference</strong>
+    <a style="float:right;" href="source/lodash.lua.html#70">line 70</a>
+    </dt>
+    <dd>
+    Creates an array of unique array values not included in the other
+ provided arrays.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to inspect.
+        </li>
+        <li><span class="parameter">...</span>
+         The arrays of values to exclude.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of filtered values.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.difference({<span class="number">3</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">9</span>, <span class="number">5</span>, <span class="number">9</span>}, {<span class="number">4</span>, <span class="number">5</span>}, {<span class="number">9</span>, <span class="number">1</span>}))
+ <span class="comment">--&gt; {3, 2}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.drop"></a>
+    <strong>_.drop</strong>
+    <a style="float:right;" href="source/lodash.lua.html#96">line 96</a>
+    </dt>
+    <dd>
+    Creates a slice of array with n elements dropped from the beginning.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+        <li><span class="parameter">n</span>
+         The number of elements to drop.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the slice of array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.drop({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>}, <span class="number">2</span>))
+ <span class="comment">--&gt; {3, 4, 5, 6}
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.dropRight"></a>
+    <strong>_.dropRight</strong>
+    <a style="float:right;" href="source/lodash.lua.html#121">line 121</a>
+    </dt>
+    <dd>
+    Creates a slice of array with n elements dropped from the end.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+        <li><span class="parameter">n</span>
+         The number of elements to drop.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the slice of array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.dropRight({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>}, <span class="number">2</span>))
+ <span class="comment">--&gt; {1, 2, 3, 4}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.dropRightWhile"></a>
+    <strong>_.dropRightWhile</strong>
+    <a style="float:right;" href="source/lodash.lua.html#159">line 159</a>
+    </dt>
+    <dd>
+    Creates a slice of array excluding elements dropped from the end. <br/>
+ Elements are dropped until predicate returns falsey.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function to invoked per iteratin.
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Return the slice of array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.dropRightWhile({<span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">4</span>}, <span class="keyword">function</span>(n)
+    <span class="keyword">return</span> n &gt; <span class="number">3</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {1, 5, 2, 3}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.dropWhile"></a>
+    <strong>_.dropWhile</strong>
+    <a style="float:right;" href="source/lodash.lua.html#175">line 175</a>
+    </dt>
+    <dd>
+    Creates a slice of array excluding elements dropped from the beginning. <br/>
+ Elements are dropped until predicate returns falsey.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration.
+         (<em>default</em> _.idenitity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Return the slice of array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.dropWhile({<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">2</span>}, <span class="keyword">function</span>(n)
+    <span class="keyword">return</span> n &lt; <span class="number">3</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {3, 4, 5, 4, 4, 2}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.fill"></a>
+    <strong>_.fill</strong>
+    <a style="float:right;" href="source/lodash.lua.html#195">line 195</a>
+    </dt>
+    <dd>
+    Fills elements of array with value from start up to, including, end.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to fill.
+        </li>
+        <li><span class="parameter">value</span>
+         The value to fill array with.
+        </li>
+        <li><span class="parameter">start</span>
+         The start position.
+         (<em>default</em> 1)
+        </li>
+        <li><span class="parameter">stop</span>
+         The end position.
+         (<em>default</em> #array)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> array = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>}
+ _.fill(array, <span class="string">'x'</span>, <span class="number">2</span>, <span class="number">3</span>)
+ _.<span class="global">print</span>(array)
+ <span class="comment">--&gt; {1, "x", "x", 4}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.findIndex"></a>
+    <strong>_.findIndex</strong>
+    <a style="float:right;" href="source/lodash.lua.html#228">line 228</a>
+    </dt>
+    <dd>
+    This method is like <a href="#_.find">_.find</a> except that it returns the index of the
+ first element predicate returns truthy for instead of the element itself.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to search.
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration.
+         (<em>default</em> _.idenitity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the index of the found element, else -1.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.findIndex({{a = <span class="number">1</span>}, {a = <span class="number">2</span>}, {a = <span class="number">3</span>}, {a = <span class="number">2</span>}, {a = <span class="number">3</span>}}, <span class="keyword">function</span>(v)
+     <span class="keyword">return</span> v.a == <span class="number">3</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; 3
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.findLastIndex"></a>
+    <strong>_.findLastIndex</strong>
+    <a style="float:right;" href="source/lodash.lua.html#244">line 244</a>
+    </dt>
+    <dd>
+    This method is like <a href="#_.findIndex">_.findIndex</a> except that it iterates over
+ elements of collection from right to left.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to search.
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration.
+         (<em>default</em> _.idenitity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the index of the found element, else -1.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.findLastIndex({{a = <span class="number">1</span>}, {a = <span class="number">2</span>}, {a = <span class="number">3</span>}, {a = <span class="number">2</span>}, {a = <span class="number">3</span>}}, <span class="keyword">function</span>(v)
+     <span class="keyword">return</span> v.a == <span class="number">3</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; 5
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.first"></a>
+    <strong>_.first</strong>
+    <a style="float:right;" href="source/lodash.lua.html#256">line 256</a>
+    </dt>
+    <dd>
+    Gets the first element of array.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the first element of array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.first({<span class="string">'w'</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>}))
+ <span class="comment">--&gt; w
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.flatten"></a>
+    <strong>_.flatten</strong>
+    <a style="float:right;" href="source/lodash.lua.html#272">line 272</a>
+    </dt>
+    <dd>
+    Flattens a nested array. <br/>
+ If isDeep is true the array is recursively flattened, otherwise
+ it’s only flattened a single level.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to flatten.
+        </li>
+        <li><span class="parameter">isDeep</span>
+         Specify a deep flatten
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new flattened array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.flatten({<span class="number">1</span>, <span class="number">2</span>, {<span class="number">3</span>, <span class="number">4</span>, {<span class="number">5</span>, <span class="number">6</span>}}}))
+ <span class="comment">--&gt; {1, 2, 3, 4, {5, 6}}
+</span> _.<span class="global">print</span>(_.flatten({<span class="number">1</span>, <span class="number">2</span>, {<span class="number">3</span>, <span class="number">4</span>, {<span class="number">5</span>, <span class="number">6</span>}}}, <span class="keyword">true</span>))
+ <span class="comment">--&gt; {1, 2, 3, 4, 5, 6}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.flattenDeep"></a>
+    <strong>_.flattenDeep</strong>
+    <a style="float:right;" href="source/lodash.lua.html#299">line 299</a>
+    </dt>
+    <dd>
+    Recursively flattens a nested array.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to flatten.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new flattened array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.flattenDeep({<span class="number">1</span>, <span class="number">2</span>, {<span class="number">3</span>, <span class="number">4</span>, {<span class="number">5</span>, <span class="number">6</span>}}}))
+ <span class="comment">--&gt; {1, 2, 3, 4, 5, 6}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.indexOf"></a>
+    <strong>_.indexOf</strong>
+    <a style="float:right;" href="source/lodash.lua.html#312">line 312</a>
+    </dt>
+    <dd>
+    Gets the index at which the first occurrence of value is found in array.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to search.
+        </li>
+        <li><span class="parameter">value</span>
+         The value to search for.
+        </li>
+        <li><span class="parameter">fromIndex</span>
+         The index to search from.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the index of the matched value, else -1.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.indexOf({<span class="number">2</span>, <span class="number">3</span>, <span class="string">'x'</span>, <span class="number">4</span>}, <span class="string">'x'</span>))
+ <span class="comment">--&gt; 3
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.initial"></a>
+    <strong>_.initial</strong>
+    <a style="float:right;" href="source/lodash.lua.html#326">line 326</a>
+    </dt>
+    <dd>
+    Gets all but the last element of array.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the slice of array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.initial({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">'a'</span>}))
+ <span class="comment">--&gt; {1, 2, 3}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.intersection"></a>
+    <strong>_.intersection</strong>
+    <a style="float:right;" href="source/lodash.lua.html#339">line 339</a>
+    </dt>
+    <dd>
+    Creates an array of unique values that are included in all of the
+ provided arrays.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">The</span>
+         arrays to inspect.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of shared values.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.intersection({<span class="number">1</span>, <span class="number">2</span>}, {<span class="number">4</span>, <span class="number">2</span>}, {<span class="number">2</span>, <span class="number">1</span>}))
+ <span class="comment">--&gt; {2}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.last"></a>
+    <strong>_.last</strong>
+    <a style="float:right;" href="source/lodash.lua.html#367">line 367</a>
+    </dt>
+    <dd>
+    Gets the last element of array.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the last element of array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.last({<span class="string">'w'</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>}))
+ <span class="comment">--&gt; z
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.lastIndexOf"></a>
+    <strong>_.lastIndexOf</strong>
+    <a style="float:right;" href="source/lodash.lua.html#381">line 381</a>
+    </dt>
+    <dd>
+    This method is like <a href="#_.indexOf">_.indexOf</a> except that it iterates
+  over elements of array from right to left.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to search.
+        </li>
+        <li><span class="parameter">value</span>
+         The value to search for.
+        </li>
+        <li><span class="parameter">fromIndex</span>
+         The index to search from.
+         (<em>default</em> #array)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the index of the matched value, else -1.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.lastIndexOf({<span class="number">2</span>, <span class="number">3</span>, <span class="string">'x'</span>, <span class="number">4</span>, <span class="string">'x'</span>, <span class="number">5</span>}, <span class="string">'x'</span>))
+ <span class="comment">--&gt; 5
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.pull"></a>
+    <strong>_.pull</strong>
+    <a style="float:right;" href="source/lodash.lua.html#397">line 397</a>
+    </dt>
+    <dd>
+    Removes all provided values from array.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to modify.
+        </li>
+        <li><span class="parameter">...</span>
+         The values to remove.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns array
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> array = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}
+ _.pull(array, <span class="number">2</span>, <span class="number">3</span>)
+ _.<span class="global">print</span>(array)
+ --&gt; {<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">1</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.pullAt"></a>
+    <strong>_.pullAt</strong>
+    <a style="float:right;" href="source/lodash.lua.html#430">line 430</a>
+    </dt>
+    <dd>
+    Removes elements from array corresponding to the given indexes and
+ returns an array of the removed elements.  Indexes may be specified
+ as an array of indexes or as individual arguments.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to modify.
+        </li>
+        <li><span class="parameter">...</span>
+         The indexes of elements to remove
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of removed elements.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> array = {<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>, <span class="string">'e'</span>, <span class="string">'f'</span>, <span class="string">'g'</span>, <span class="string">'h'</span>, <span class="string">'i'</span>, <span class="string">'j'</span>}
+ <span class="keyword">local</span> t = _.pullAt(array, <span class="number">4</span>, <span class="number">9</span>, <span class="number">8</span>)
+ _.<span class="global">print</span>(array)
+ <span class="comment">--&gt; {"a", "b", "c", "e", "f", "g", "j"}
+</span> _.<span class="global">print</span>(t)
+ <span class="comment">--&gt; {"d", "h", "i"}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.remove"></a>
+    <strong>_.remove</strong>
+    <a style="float:right;" href="source/lodash.lua.html#457">line 457</a>
+    </dt>
+    <dd>
+    Removes all elements from array that predicate returns truthy for
+ and returns an array of the removed elements.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to modify.
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of removed elements
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> array = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">4</span>}
+ <span class="keyword">local</span> t = _.remove(array, <span class="keyword">function</span>(value)
+     <span class="keyword">return</span> value &gt; <span class="number">4</span>
+ <span class="keyword">end</span>)
+ _.<span class="global">print</span>(array)
+ <span class="comment">--&gt; {1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4}
+</span> _.<span class="global">print</span>(t)
+ <span class="comment">--&gt; {5, 6, 7, 5, 6, 5}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.rest"></a>
+    <strong>_.rest</strong>
+    <a style="float:right;" href="source/lodash.lua.html#479">line 479</a>
+    </dt>
+    <dd>
+    Gets all but the first element of array.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the slice ofa array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">_.<span class="global">print</span>(_.rest({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">'a'</span>}))
+ --&gt; {<span class="number">2</span>, <span class="number">3</span>, <span class="string">'a'</span>}</pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.reverse"></a>
+    <strong>_.reverse</strong>
+    <a style="float:right;" href="source/lodash.lua.html#492">line 492</a>
+    </dt>
+    <dd>
+    Reverses the array so the first element becomes the last, the second
+ element becomes the second to last, and so on.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to mutate.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new reversed array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.reverse({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">'a'</span>, <span class="string">'b'</span>}))
+ <span class="comment">--&gt; {'b', 'a', 3, 2, 1}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.slice"></a>
+    <strong>_.slice</strong>
+    <a style="float:right;" href="source/lodash.lua.html#510">line 510</a>
+    </dt>
+    <dd>
+    Creates a slice of array from start up to, including, end.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to slice.
+        </li>
+        <li><span class="parameter">start</span>
+         The start position.
+         (<em>default</em> 1)
+        </li>
+        <li><span class="parameter">stop</span>
+         The end position
+         (<em>default</em> #array)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the slice of array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.slice({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>}, <span class="number">2</span>, <span class="number">3</span>))
+ <span class="comment">--&gt; {2, 3}
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.take"></a>
+    <strong>_.take</strong>
+    <a style="float:right;" href="source/lodash.lua.html#528">line 528</a>
+    </dt>
+    <dd>
+    Creates a slice of array with n elements taken from the beginning.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+        <li><span class="parameter">n</span>
+         The number of elements to take.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the slice of array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.take({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}, <span class="number">3</span>))
+ <span class="comment">--&gt; {1, 2, 3}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.takeRight"></a>
+    <strong>_.takeRight</strong>
+    <a style="float:right;" href="source/lodash.lua.html#542">line 542</a>
+    </dt>
+    <dd>
+    Creates a slice of array with n elements taken from the end.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+        <li><span class="parameter">n</span>
+         The number of elements to take.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the slice of array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.takeRight({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>}, <span class="number">3</span>))
+ <span class="comment">--&gt; {3, 4, 5}
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.takeRightWhile"></a>
+    <strong>_.takeRightWhile</strong>
+    <a style="float:right;" href="source/lodash.lua.html#577">line 577</a>
+    </dt>
+    <dd>
+    Creates a slice of array with elements taken from the end.  Elements
+ are taken until predicate returns falsey. The predicate is bound to
+ selfArg and invoked with three arguments: (value, index, array).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration.
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.takeRightWhile({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>}, <span class="keyword">function</span>(n)
+     <span class="keyword">return</span> n &gt; <span class="number">4</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {5, 6, 7, 8}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.takeWhile"></a>
+    <strong>_.takeWhile</strong>
+    <a style="float:right;" href="source/lodash.lua.html#615">line 615</a>
+    </dt>
+    <dd>
+    Creates a slice of array with elements taken from the beginning.  Elements
+ are taken until predicate returns falsey. The predicate is bound to
+ selfArg and invoked with three arguments: (value, index, array).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to query.
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration.
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.takeWhile({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>}, <span class="keyword">function</span>(n)
+     <span class="keyword">return</span> n &lt; <span class="number">5</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {1, 2, 3, 4}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.union"></a>
+    <strong>_.union</strong>
+    <a style="float:right;" href="source/lodash.lua.html#588">line 588</a>
+    </dt>
+    <dd>
+    Creates an array of unique values, from all of the
+ provided arrays.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         The arrays to inspect
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.union({<span class="number">1</span>, <span class="number">2</span>}, {<span class="number">4</span>, <span class="number">2</span>}, {<span class="number">2</span>, <span class="number">1</span>}))
+ <span class="comment">--&gt; {1, 2, 4}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.uniq"></a>
+    <strong>_.uniq</strong>
+    <a style="float:right;" href="source/lodash.lua.html#636">line 636</a>
+    </dt>
+    <dd>
+    Creates a duplicate-free version of an array in which only the first
+ occurence of each element is kept.  If an iteratee function is provided
+ it’s invoked for each element in the array to generate the criterion
+ by which uniqueness is computed. The iteratee is bound to thisArg and
+ invoked with three arguments: (value, index, array).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to inspect.
+        </li>
+        <li><span class="parameter">iteratee</span>
+         The function invoked per iteration.
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new duplicate-value-free array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.uniq({<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">2</span>}))
+ <span class="comment">--&gt; {1, 3, 2}
+</span>_.<span class="global">print</span>(_.uniq({{x=<span class="number">1</span>}, {x=<span class="number">2</span>}, {x=<span class="number">2</span>}, {x=<span class="number">3</span>}, {x=<span class="number">1</span>}}, <span class="keyword">function</span>(n)
+     <span class="keyword">return</span> n.x
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {{["x"]=1}, {["x"]=2}, {["x"]=3}}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.unzip"></a>
+    <strong>_.unzip</strong>
+    <a style="float:right;" href="source/lodash.lua.html#689">line 689</a>
+    </dt>
+    <dd>
+    This method is like <a href="#_.zip">_.zip</a> except that it accepts an array of grouped
+ elements and creates an array regrouping the elements to their pre-zip
+ configuration.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array of grouped elements to process.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of regrouped elements.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> t = _.zip({<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>}, {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}, {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>})
+ _.<span class="global">print</span>(t)
+ <span class="comment">--&gt; {{"a", 1, 10}, {"b", 2, 20}, {"c", 3, 30}}
+</span> _.<span class="global">print</span>(_.unzip(t))
+ <span class="comment">--&gt; {{"a", "b", "c"}, {1, 2, 3}, {10, 20, 30}}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.without"></a>
+    <strong>_.without</strong>
+    <a style="float:right;" href="source/lodash.lua.html#701">line 701</a>
+    </dt>
+    <dd>
+    Creates an array excluding all provided values
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">array</span>
+         The array to filter.
+        </li>
+        <li><span class="parameter">...</span>
+         The values to exclude.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of filtered values.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.without({<span class="number">1</span>,<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">2</span>},  <span class="number">5</span>, <span class="number">1</span>))
+ <span class="comment">--&gt; {2, 3, 2, 3, 2}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.zip"></a>
+    <strong>_.zip</strong>
+    <a style="float:right;" href="source/lodash.lua.html#722">line 722</a>
+    </dt>
+    <dd>
+    Creates an array of grouped elements, the first of which contains
+ the first elements of the given arrays, the second of which contains
+ the second elements of the given arrays, and so on.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         The arrays to process
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of grouped elements.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> t = _.zip({<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>}, {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}, {<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>})
+ _.<span class="global">print</span>(t)
+ <span class="comment">--&gt; {{"a", 1, 10}, {"b", 2, 20}, {"c", 3, 30}}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.zipObject"></a>
+    <strong>_.zipObject</strong>
+    <a style="float:right;" href="source/lodash.lua.html#661">line 661</a>
+    </dt>
+    <dd>
+    The inverse of _.pairs; this method returns an object composed from
+ arrays of property names and values.  Provide either a single two dimensional
+ array, e.g. [[key1, value1], [key2, value2]] or two arrays, one of
+ property names and one of corresponding values.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         The properties/values
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new object.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.zipObject({{<span class="string">'fred'</span>, <span class="number">30</span>}, {<span class="string">'alex'</span>, <span class="number">20</span>}}))
+ <span class="comment">--&gt; {["alex"]=20, ["fred"]=30}
+</span> _.<span class="global">print</span>(_.zipObject({<span class="string">'fred'</span>, <span class="string">'alex'</span>}, {<span class="number">30</span>, <span class="number">20</span>}))
+ <span class="comment">--&gt; {["alex"]=20, ["fred"]=30}
+</span></pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Collection"></a>Collection </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "_.at"></a>
+    <strong>_.at</strong>
+    <a style="float:right;" href="source/lodash.lua.html#747">line 747</a>
+    </dt>
+    <dd>
+    Creates an array of elements corresponding to the given keys,
+ or indexes, of collection.  Keys may be specified as individual
+ arguments or as arrays of keys.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over.
+        </li>
+        <li><span class="parameter">...</span>
+         The property names or indexes of elements to pick,
+ specified individually or in arrays.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Return the new array of picked elements.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.at({<span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, a=<span class="string">'a'</span>, b=<span class="string">'b'</span>}, {<span class="number">1</span>, <span class="number">2</span>}, <span class="string">'b'</span>))
+ <span class="comment">--&gt; {"1", "2", "b"}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.countBy"></a>
+    <strong>_.countBy</strong>
+    <a style="float:right;" href="source/lodash.lua.html#777">line 777</a>
+    </dt>
+    <dd>
+    Creates an object composed of keys generated from the results of
+ running each element of collection through iteratee.  The corresponding
+ value of each key is the number of times the key was returned by
+ iteratee. The iteratee is bound to selfArg and invoked with three arguments:
+ (value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">iteratee</span>
+         The function invoked per iteration.
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the composed aggregate object.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.countBy({<span class="number">4.3</span>, <span class="number">6.1</span>, <span class="number">6.4</span>}, <span class="keyword">function</span>(n)
+   <span class="keyword">return</span> <span class="global">math</span>.floor(n)
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {[4]=1, [6]=2}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.every"></a>
+    <strong>_.every</strong>
+    <a style="float:right;" href="source/lodash.lua.html#864">line 864</a>
+    </dt>
+    <dd>
+    Checks if predicate returns truthy for all elements of collection. <br/>
+ The predicate is bound to selfArg and invoked with three arguments:
+ (value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.every({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="string">'5'</span>, <span class="number">6</span>}, _.isNumber))
+ <span class="comment">--&gt; false
+</span> _.<span class="global">print</span>(_.every({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>}, _.isNumber))
+ <span class="comment">--&gt; true
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.filter"></a>
+    <strong>_.filter</strong>
+    <a style="float:right;" href="source/lodash.lua.html#900">line 900</a>
+    </dt>
+    <dd>
+    Iterates over elements of collection, returning an array of all
+ elements predicate returns truthy for.  The predicate is bound to
+ selfArg and invoked with three arguments: (value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.filter({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="string">'5'</span>, <span class="number">6</span>, <span class="string">'7'</span>}, _.isNumber))
+ <span class="comment">--&gt; {1, 2, 3, 4, 6}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.find"></a>
+    <strong>_.find</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1235">line 1235</a>
+    </dt>
+    <dd>
+    Iterates over elements of collection, returning the first element
+ predicate returns truthy for.  The predicate is bound to selfArg and
+ invoked with three arguments: (value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to search. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.find({{a = <span class="number">1</span>}, {a = <span class="number">2</span>}, {a = <span class="number">3</span>}, {a = <span class="number">2</span>}, {a = <span class="number">3</span>}}, <span class="keyword">function</span>(v)
+     <span class="keyword">return</span> v.a == <span class="number">3</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {[a]=3}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.findLast"></a>
+    <strong>_.findLast</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1255">line 1255</a>
+    </dt>
+    <dd>
+    This method is like _.find except that it iterates over elements of
+ collection from right to left.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to search. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.findLast({{a = <span class="number">1</span>}, {a = <span class="number">2</span>}, {a = <span class="number">3</span>, x = <span class="number">1</span>}, {a = <span class="number">2</span>}, {a = <span class="number">3</span>, x = <span class="number">2</span>}},
+ <span class="keyword">function</span>(v)
+     <span class="keyword">return</span> v.a == <span class="number">3</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {[a]=3, [x]=2}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.forEach"></a>
+    <strong>_.forEach</strong>
+    <a style="float:right;" href="source/lodash.lua.html#914">line 914</a>
+    </dt>
+    <dd>
+    Iterates over elements of collection invoking iteratee for each element.
+ The iteratee is bound to selfArg and invoked with three arguments:
+ (value, index|key, collection). Iteratee functions may exit iteration
+ early by explicitly returning false.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns collection.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "_.forEachRight"></a>
+    <strong>_.forEachRight</strong>
+    <a style="float:right;" href="source/lodash.lua.html#929">line 929</a>
+    </dt>
+    <dd>
+    This method is like <a href="#_.forEach">_.forEach</a> except that it iterates
+ over elements of collection from right to left.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns collection.
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "_.groupBy"></a>
+    <strong>_.groupBy</strong>
+    <a style="float:right;" href="source/lodash.lua.html#807">line 807</a>
+    </dt>
+    <dd>
+    Creates an object composed of keys generated from the results of
+ running each element of collection through iteratee.  The corresponding
+ value of each key is an array of the elements responsible for generating
+ the key. The iteratee is bound to selfArg and invoked with three arguments:
+ (value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">iteratee</span>
+         The function invoked per iteration.
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the composed aggregate object.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.groupBy({<span class="number">4.3</span>, <span class="number">6.1</span>, <span class="number">6.4</span>}, <span class="keyword">function</span>(n)
+   <span class="keyword">return</span> <span class="global">math</span>.floor(n)
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {[4]={4.3}, [6]={6.1, 6.4}}
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.includes"></a>
+    <strong>_.includes</strong>
+    <a style="float:right;" href="source/lodash.lua.html#944">line 944</a>
+    </dt>
+    <dd>
+    Checks if target is in collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to search
+        </li>
+        <li><span class="parameter">target</span>
+         The value to search for.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="global">print</span>(_.includes({<span class="number">1</span>, <span class="number">2</span>, <span class="string">'x'</span>, <span class="number">3</span>, [<span class="string">'5'</span>]=<span class="number">4</span>, x=<span class="number">3</span>, <span class="number">5</span>}, <span class="string">'x'</span>))
+ <span class="comment">--&gt; true
+</span> <span class="global">print</span>(_.includes({<span class="number">1</span>, <span class="number">2</span>, <span class="string">'x'</span>, <span class="number">3</span>, [<span class="string">'5'</span>]=<span class="number">4</span>, x=<span class="number">3</span>, <span class="number">5</span>}, <span class="string">'z'</span>))
+ --&gt; <span class="keyword">false</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.indexBy"></a>
+    <strong>_.indexBy</strong>
+    <a style="float:right;" href="source/lodash.lua.html#841">line 841</a>
+    </dt>
+    <dd>
+    Creates an object composed of keys generated from the results of
+ running each element of collection through iteratee.  The corresponding
+ value of each key is the last element responsible for generating the key.
+ The iteratee function is bound to selfArg and invoked with three arguments:
+ (value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">iteratee</span>
+         The function invoked per iteration.
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the composed aggregate object.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> keyData = {
+     {dir=<span class="string">'l'</span>, a=<span class="number">1</span>},
+     {dir=<span class="string">'r'</span>, a=<span class="number">2</span>}
+ }
+ _.<span class="global">print</span>(<span class="string">'40.indexBy          :'</span>, _.indexBy(keyData, <span class="keyword">function</span>(n)
+     <span class="keyword">return</span> n.dir
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {["l"]={[a]=1, [dir]="l"}, ["r"]={[a]=2, [dir]="r"}}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.invoke"></a>
+    <strong>_.invoke</strong>
+    <a style="float:right;" href="source/lodash.lua.html#962">line 962</a>
+    </dt>
+    <dd>
+    Invokes method of each element in collection, returning an array of the
+ results of each invoked method.  Any additional arguments are provided
+ to each invoked method. func bound to, each element in collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over.
+        </li>
+        <li><span class="parameter">method</span>
+         The method to invoke per iteration.
+        </li>
+        <li><span class="parameter">...</span>
+         The arguments to invoke the method with.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the array of results.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.invoke({<span class="string">'1.first'</span>, <span class="string">'2.second'</span>, <span class="string">'3.third'</span>}, <span class="global">string</span>.sub, <span class="number">1</span>, <span class="number">1</span>))
+ <span class="comment">--&gt; {"1", "2", "3"}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.map"></a>
+    <strong>_.map</strong>
+    <a style="float:right;" href="source/lodash.lua.html#982">line 982</a>
+    </dt>
+    <dd>
+    Creates an array of values by running each element in collection through
+ iteratee.  The iteratee is bound to selfArg and invoked with three
+ arguments: (value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">iteratee</span>
+         The function invoked per iteration
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.map({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>}, <span class="keyword">function</span>(n)
+     <span class="keyword">return</span> n * n
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {1, 4, 9, 16, 25, 36, 49, 64, 81}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.partition"></a>
+    <strong>_.partition</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1005">line 1005</a>
+    </dt>
+    <dd>
+    Creates an array of elements split into two groups, the first of
+ which contains elements predicate returns truthy for, while the second
+ of which contains elements predicate returns falsey for.  The predicate
+ is bound to selfArg and invoked with three arguments:
+ (value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the array of grouped elements.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.partition({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>}, <span class="keyword">function</span> (n)
+     <span class="keyword">return</span> n &gt; <span class="number">3</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {{4, 5, 6, 7}, {1, 2, 3}}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.pluck"></a>
+    <strong>_.pluck</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1030">line 1030</a>
+    </dt>
+    <dd>
+    Gets the property value of path from all elements in collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over.
+        </li>
+        <li><span class="parameter">path</span>
+         The path of the property to pluck.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> users = {
+   { user = <span class="string">'barney'</span>, age = <span class="number">36</span>, child = {age = <span class="number">5</span>}},
+   { user = <span class="string">'fred'</span>,   age = <span class="number">40</span>, child = {age = <span class="number">6</span>} }
+ }
+ _.<span class="global">print</span>(_.pluck(users, {<span class="string">'user'</span>}))
+ <span class="comment">--&gt; {"barney", "fred"}
+</span> _.<span class="global">print</span>(_.pluck(users, {<span class="string">'child'</span>, <span class="string">'age'</span>}))
+ <span class="comment">--&gt; {5, 6}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.reduce"></a>
+    <strong>_.reduce</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1061">line 1061</a>
+    </dt>
+    <dd>
+    Reduces collection to a value which is the accumulated result of
+ running each element in collection through iteratee, where each
+ successive invocation is supplied the return value of the previous. <br/>
+ If accumulator is not provided the first element of collection is used
+  as the initial value. The iteratee is bound to selfArg and invoked
+ with four arguments: (accumulator, value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over.
+        </li>
+        <li><span class="parameter">iteratee</span>
+         The function invoked per iteration.
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">accumulator</span>
+         The initial value.
+         (<em>default</em> <first element>)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the accumulated value.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.reduce({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}, <span class="keyword">function</span>(total, n)
+   <span class="keyword">return</span> n + total;
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; 6
+</span> _.<span class="global">print</span>(_.reduce({a = <span class="number">1</span>, b = <span class="number">2</span>}, <span class="keyword">function</span>(result, n, key)
+     result[key] = n * <span class="number">3</span>
+     <span class="keyword">return</span> result;
+ <span class="keyword">end</span>, {}))
+ <span class="comment">--&gt; {["a"]=3, ["b"]=6}
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.reduceRight"></a>
+    <strong>_.reduceRight</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1087">line 1087</a>
+    </dt>
+    <dd>
+    This method is like _.reduce except that it iterates over elements
+ of collection from right to left.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over.
+        </li>
+        <li><span class="parameter">iteratee</span>
+         The function invoked per iteration.
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">accumulator</span>
+         The initial value.
+         (<em>default</em> <first element>)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the accumulated value.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> array = {<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>};
+ _.<span class="global">print</span>(_.reduceRight(array, <span class="keyword">function</span>(str, other)
+   <span class="keyword">return</span> str .. other
+ <span class="keyword">end</span>, <span class="string">''</span>))
+ <span class="comment">--&gt; 543210
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.reject"></a>
+    <strong>_.reject</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1108">line 1108</a>
+    </dt>
+    <dd>
+    The opposite of <a href="#_.filter">_.filter</a>; this method returns the elements of
+ collection that predicate does not return truthy for.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.reject({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="string">'5'</span>, <span class="number">6</span>, <span class="string">'7'</span>}, _.isNumber))
+ <span class="comment">--&gt; {"5", "7"}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.sample"></a>
+    <strong>_.sample</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1122">line 1122</a>
+    </dt>
+    <dd>
+    Gets a random element or n random elements from a collection.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to sample.
+        </li>
+        <li><span class="parameter">n</span>
+         The number of elements to sample.
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the random sample(s).
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.sample({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, a=<span class="number">4</span>, b=<span class="string">'x'</span>, <span class="number">5</span>, <span class="number">23</span>, <span class="number">24</span>}, <span class="number">4</span>))
+ <span class="comment">--&gt; {5, "x", 1, 23}
+</span> _.<span class="global">print</span>(_.sample({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, a=<span class="number">4</span>, b=<span class="string">'x'</span>, <span class="number">5</span>, <span class="number">23</span>, <span class="number">24</span>}))
+ <span class="comment">--&gt; 4
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.size"></a>
+    <strong>_.size</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1145">line 1145</a>
+    </dt>
+    <dd>
+    Gets the size of collection by returning its length for array-like
+ values or the number of own enumerable properties for objects.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to inspect.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the size of collection.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.size({<span class="string">'abc'</span>, <span class="string">'def'</span>}))
+ <span class="comment">--&gt; 2
+</span> _.<span class="global">print</span>(_.size(<span class="string">'abcdefg'</span>))
+ <span class="comment">--&gt; 7
+</span> _.<span class="global">print</span>(_.size({a=<span class="number">1</span>, b=<span class="number">2</span>,c=<span class="number">3</span>}))
+ <span class="comment">--&gt; 3
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.some"></a>
+    <strong>_.some</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1167">line 1167</a>
+    </dt>
+    <dd>
+    Checks if predicate returns truthy for any element of collection. <br/>
+ The function returns as soon as it finds a passing value and does
+ not iterate over the entire collection. The predicate is bound to
+ selfArg and invoked with three arguments: (value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns true if any element passes the predicate check, else false.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.some({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>}, _.isString))
+ <span class="comment">--&gt; false
+</span> _.<span class="global">print</span>(_.some({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="string">'5'</span>, <span class="number">6</span>}, _.isString))
+ --&gt; <span class="keyword">true</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.sortBy"></a>
+    <strong>_.sortBy</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1201">line 1201</a>
+    </dt>
+    <dd>
+    Creates an array of elements, sorted in ascending order by the
+ results of running each element in a collection through iteratee. <br/>
+ The iteratee is bound to selfArg and
+ invoked with three arguments: (value, index|key, collection).
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">collection</span>
+         The collection to iterate over.
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+         (<em>default</em> _.identity)
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+         (<em>optional</em>)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new sorted array.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> t = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}
+ _.<span class="global">print</span>(_.sortBy(t, <span class="keyword">function</span> (a)
+     <span class="keyword">return</span> <span class="global">math</span>.sin(a)
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {1, 3, 2}
+</span> <span class="keyword">local</span> users = {
+     { user=<span class="string">'fred'</span> },
+     { user=<span class="string">'alex'</span> },
+     { user=<span class="string">'zoee'</span> },
+     { user=<span class="string">'john'</span> },
+ }
+ _.<span class="global">print</span>(_.sortBy(users, <span class="keyword">function</span> (a)
+     <span class="keyword">return</span> a.user
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; {{["user"]="alex"}, {["user"]="fred"}, {["user"]="john"}, {["user"]="zoee"}}
+</span> </pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Function"></a>Function </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "_.after"></a>
+    <strong>_.after</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1279">line 1279</a>
+    </dt>
+    <dd>
+    This method creates a function that invokes func once it’s called n
+  or more times.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+         The number of calls before func invoked.
+        </li>
+        <li><span class="parameter">func</span>
+         The function to restrict.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new restricted function.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> printAfter3 = _.after(<span class="number">3</span>, <span class="global">print</span>)
+ <span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">5</span> <span class="keyword">do</span>
+    printAfter3(<span class="string">'done'</span>, i)
+ <span class="keyword">end</span>
+ <span class="comment">--&gt; done 4
+</span> <span class="comment">--&gt; done 5
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.ary"></a>
+    <strong>_.ary</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1299">line 1299</a>
+    </dt>
+    <dd>
+    Creates a function that accepts up to n arguments ignoring any
+ additional arguments.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">func</span>
+         The function to cap arguments for.
+        </li>
+        <li><span class="parameter">n</span>
+         the arity cap.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new function
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> printOnly3 =_.ary(<span class="global">print</span>, <span class="number">3</span>)
+ printOnly3(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="string">'x'</span>, <span class="string">'y'</span>, <span class="number">6</span>)
+ <span class="comment">--&gt; 1    2   3
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.before"></a>
+    <strong>_.before</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1326">line 1326</a>
+    </dt>
+    <dd>
+    Creates a function that invokes func while it’s called less than n times.
+ Subsequent calls to the created function return the result of the
+ last func invocation.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+         The number of calls at which func is no longer invoked.
+        </li>
+        <li><span class="parameter">func</span>
+         The function to restrict.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new restriced function.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> printBefore3 = _.before(<span class="number">3</span>, <span class="global">print</span>)
+ <span class="keyword">for</span> i = <span class="number">1</span>, <span class="number">10</span> <span class="keyword">do</span>
+     printBefore3(i, <span class="string">'ok'</span>)
+ <span class="keyword">end</span>
+ <span class="comment">--&gt;  1   ok
+</span> <span class="comment">--&gt;  2   ok
+</span> <span class="comment">--&gt;  3   ok
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.modArgs"></a>
+    <strong>_.modArgs</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1361">line 1361</a>
+    </dt>
+    <dd>
+    Creates a function that runs each argument through a corresponding
+ transform function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">func</span>
+         The function to wrap
+        </li>
+        <li><span class="parameter">...</span>
+         The functions to transform arguments, specified as
+ individual functions or arrays of functions.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new function.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> increment = <span class="keyword">function</span>(...)
+     <span class="keyword">return</span> _.args(_.map(_.<span class="global">table</span>(...), <span class="keyword">function</span>(n)
+         <span class="keyword">return</span> n + <span class="number">1</span>
+     <span class="keyword">end</span>))
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> pow = <span class="keyword">function</span>(...)
+     <span class="keyword">return</span> _.args(_.map(_.<span class="global">table</span>(...), <span class="keyword">function</span>(n)
+         <span class="keyword">return</span> n * n
+     <span class="keyword">end</span>))
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> modded = _.modArgs(<span class="keyword">function</span>(...)
+     <span class="global">print</span>(...)
+ <span class="keyword">end</span>, {increment, increment}, pow)
+ modded(<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>)
+ <span class="comment">--&gt;  4   9   16
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.negate"></a>
+    <strong>_.negate</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1403">line 1403</a>
+    </dt>
+    <dd>
+    Creates a function that negates the result of the predicate func. <br/>
+ The func predicate is invoked with arguments of the created function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">func</span>
+         The preadicate to negate.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new function
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> isEven = <span class="keyword">function</span> (n)
+     <span class="keyword">return</span> n % <span class="number">2</span> == <span class="number">0</span>
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> isOdd = _.negate(isEven)
+ _.<span class="global">print</span>(_.filter({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>}, isEven))
+ <span class="comment">--&gt; {2, 4, 6}
+</span> _.<span class="global">print</span>(_.filter({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>}, isOdd))
+ <span class="comment">--&gt; {1, 3, 5}
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.once"></a>
+    <strong>_.once</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1428">line 1428</a>
+    </dt>
+    <dd>
+    Creates a function that is restricted to invoking func once.  Repeat
+ calls to the function return the value of the first call. The func
+ is invoked with arguments of the created function.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">func</span>
+         The function to restrict.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new function.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> createApp = <span class="keyword">function</span>(version)
+     <span class="global">print</span>(<span class="string">'App created with version '</span>..version)
+     <span class="keyword">return</span> version
+ <span class="keyword">end</span>
+ <span class="keyword">local</span> initialize = _.once(createApp)
+ initialize(<span class="number">1.1</span>)
+ initialize(<span class="number">1.1</span>)
+ initialize(<span class="number">1.1</span>)
+ <span class="comment">--&gt; App created with version 1.1
+</span> <span class="comment">--&gt; 1.1
+</span> <span class="comment">--&gt; 1.1
+</span> <span class="comment">--&gt; 1.1
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.rearg"></a>
+    <strong>_.rearg</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1458">line 1458</a>
+    </dt>
+    <dd>
+    Creates a function that invokes func with arguments arranged according
+ to the specified indexes where the argument value at the first index
+ is provided as the first argument, the argument value at the second
+ index is provided as the second argument, and so on.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">func</span>
+         The function to rearrange arguments for.
+        </li>
+        <li><span class="parameter">...</span>
+         The arranged argument indexes, specified as individual
+ indexes or arrays of indexes.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new function.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> rearged = _.rearg(<span class="keyword">function</span>(a, b, c)
+   <span class="keyword">return</span> {a, b, c};
+ <span class="keyword">end</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>)
+ _.<span class="global">print</span>(rearged(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>))
+ <span class="comment">--&gt; {"b", "a", "c"}
+</span> _.<span class="global">print</span>(rearged(<span class="string">'b'</span>, <span class="string">'a'</span>, <span class="string">'c'</span>))
+ <span class="comment">--&gt; {"a", "b", "c"}
+</span></pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Lang"></a>Lang </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "_.args"></a>
+    <strong>_.args</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1496">line 1496</a>
+    </dt>
+    <dd>
+    Cast value to arguments
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         value to cast
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns arguments
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="global">print</span>(_.args({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}))
+ <span class="comment">--&gt; 1    2   3
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.bool"></a>
+    <strong>_.bool</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1758">line 1758</a>
+    </dt>
+    <dd>
+    Cast anything to boolean.  If any function detected, call and cast its
+ result. Return false for 0, nil, table and empty string.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         value to cast
+        </li>
+        <li><span class="parameter">...</span>
+         The parameters to pass to any detected function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        casted value
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="global">print</span>(_.bool({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}))
+ <span class="comment">--&gt; false
+</span> <span class="global">print</span>(_.bool(<span class="string">"123"</span>))
+ <span class="comment">--&gt; true
+</span> <span class="global">print</span>(_.bool(<span class="number">0</span>))
+ <span class="comment">--&gt; false
+</span> <span class="global">print</span>(_.bool(<span class="keyword">function</span>(a) <span class="keyword">return</span> a <span class="keyword">end</span>, <span class="string">"555"</span>))
+ <span class="comment">--&gt; true
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.func"></a>
+    <strong>_.func</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1720">line 1720</a>
+    </dt>
+    <dd>
+    Cast parameters to a function that return passed parameters.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         value to cast
+        </li>
+        <li><span class="parameter">...</span>
+         The parameters to pass to any detected function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        casted value
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> f = _.func(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)
+ _.<span class="global">print</span>(f())
+ <span class="comment">--&gt; 1    2   3
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.gt"></a>
+    <strong>_.gt</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1511">line 1511</a>
+    </dt>
+    <dd>
+    Checks if value is greater than other.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         The value to compare.
+        </li>
+        <li><span class="parameter">other</span>
+         The other value to compare.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.gt(<span class="number">1</span>, <span class="number">3</span>))
+ <span class="comment">--&gt; false
+</span> _.<span class="global">print</span>(_.gt(<span class="number">4</span>, <span class="number">3</span>))
+ <span class="comment">--&gt; true
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.gte"></a>
+    <strong>_.gte</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1530">line 1530</a>
+    </dt>
+    <dd>
+    Checks if value is greater than other.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         The value to compare.
+        </li>
+        <li><span class="parameter">other</span>
+         The other value to compare.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.gte(<span class="number">1</span>, <span class="number">3</span>))
+ <span class="comment">--&gt; false
+</span> _.<span class="global">print</span>(_.gte(<span class="number">3</span>, <span class="number">3</span>))
+ <span class="comment">--&gt; true
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.isBoolean"></a>
+    <strong>_.isBoolean</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1554">line 1554</a>
+    </dt>
+    <dd>
+    Checks if value is classified as a boolean primitive.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         the value to check
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns true if value is correctly classified, else false.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.isBoolean(<span class="keyword">false</span>))
+ <span class="comment">--&gt; true
+</span> _.<span class="global">print</span>(_.isBoolean(<span class="string">'x'</span>))
+ <span class="comment">--&gt; false
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.isEmpty"></a>
+    <strong>_.isEmpty</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1573">line 1573</a>
+    </dt>
+    <dd>
+    Checks if value is empty.  A value is considered empty unless it’s an
+ arguments table, array, string with a length greater than 0 or an
+object with own enumerable properties.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         The value to inspect.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns true if value is empty, else false.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.isEmpty(<span class="keyword">true</span>))
+ <span class="comment">--&gt; true
+</span> _.<span class="global">print</span>(_.isEmpty(<span class="number">1</span>))
+ <span class="comment">--&gt; true
+</span> _.<span class="global">print</span>(_.isEmpty({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}))
+ <span class="comment">--&gt; false
+</span> _.<span class="global">print</span>(_.isEmpty({a= <span class="number">1</span>}))
+ <span class="comment">--&gt; false
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.isFunction"></a>
+    <strong>_.isFunction</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1596">line 1596</a>
+    </dt>
+    <dd>
+    Checks if value is classified as a function primitive.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         the value to check
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns true if value is correctly classified, else false.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.isFunction(<span class="keyword">function</span>() <span class="keyword">end</span>))
+ <span class="comment">--&gt; true
+</span> _.<span class="global">print</span>(_.isFunction(<span class="number">1</span>))
+ <span class="comment">--&gt; false
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.isNil"></a>
+    <strong>_.isNil</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1610">line 1610</a>
+    </dt>
+    <dd>
+    Checks if value is classified as a nil primitive.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         the value to check
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns true if value is correctly classified, else false.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.isNil(variable)
+ <span class="comment">--&gt; true
+</span> variable = <span class="number">1</span>
+ _.<span class="global">print</span>(_.isNil(variable))
+ <span class="comment">--&gt; false
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.isNumber"></a>
+    <strong>_.isNumber</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1623">line 1623</a>
+    </dt>
+    <dd>
+    Checks if value is classified as a number primitive.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         the value to check
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns true if value is correctly classified, else false.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.isNumber(<span class="number">1</span>))
+ <span class="comment">--&gt; true
+</span> _.<span class="global">print</span>(_.isNumber(<span class="string">'1'</span>))
+ <span class="comment">--&gt; false
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.isString"></a>
+    <strong>_.isString</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1636">line 1636</a>
+    </dt>
+    <dd>
+    Checks if value is classified as a string primitive.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         the value to check
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns true if value is correctly classified, else false.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.isString(<span class="string">'1'</span>))
+ <span class="comment">--&gt; true
+</span> _.<span class="global">print</span>(_.isString(<span class="number">1</span>))
+ <span class="comment">--&gt; false
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.isTable"></a>
+    <strong>_.isTable</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1649">line 1649</a>
+    </dt>
+    <dd>
+    Checks if value is classified as a table primitive.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         the value to check
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns true if value is correctly classified, else false.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.isTable({<span class="string">'1'</span>}))
+ <span class="comment">--&gt; true
+</span> _.<span class="global">print</span>(_.isString(<span class="number">1</span>))
+ <span class="comment">--&gt; false
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.lt"></a>
+    <strong>_.lt</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1666">line 1666</a>
+    </dt>
+    <dd>
+    Checks if value is less than other.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         The value to compare.
+        </li>
+        <li><span class="parameter">other</span>
+         The other value to compare.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.lt(<span class="number">1</span>, <span class="number">3</span>))
+ <span class="comment">--&gt; true
+</span> _.<span class="global">print</span>(_.lt(<span class="number">3</span>, <span class="number">3</span>))
+ <span class="comment">--&gt; false
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.lte"></a>
+    <strong>_.lte</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1684">line 1684</a>
+    </dt>
+    <dd>
+    Checks if value is less than or euqal to other.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         The value to compare.
+        </li>
+        <li><span class="parameter">other</span>
+         The other value to compare.
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.lt(<span class="number">4</span>, <span class="number">3</span>))
+ <span class="comment">--&gt; false
+</span> _.<span class="global">print</span>(_.lt(<span class="number">3</span>, <span class="number">3</span>))
+ --&gt; <span class="keyword">true</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.num"></a>
+    <strong>_.num</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1787">line 1787</a>
+    </dt>
+    <dd>
+    Cast anything to number.  If any function detected, call and cast its
+ result. Return 0 for nil and table.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         value to cast
+        </li>
+        <li><span class="parameter">...</span>
+         The parameters to pass to any detected function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        casted value
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="global">print</span>(_.num({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>}))
+ <span class="comment">--&gt; 0
+</span> <span class="global">print</span>(_.num(<span class="string">"123"</span>))
+ <span class="comment">--&gt; 123
+</span> <span class="global">print</span>(_.num(<span class="keyword">true</span>))
+ <span class="comment">--&gt; 1
+</span> <span class="global">print</span>(_.num(<span class="keyword">function</span>(a) <span class="keyword">return</span> a <span class="keyword">end</span>, <span class="string">"555"</span>))
+ <span class="comment">--&gt; 555
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.str"></a>
+    <strong>_.str</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1822">line 1822</a>
+    </dt>
+    <dd>
+    Cast anything to string.  If any function detected, call and cast its
+ result.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         value to cast
+        </li>
+        <li><span class="parameter">...</span>
+         The parameters to pass to any detected function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        casted value
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="global">print</span>(_.str({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, {k=<span class="number">2</span>, {<span class="string">'x'</span>, <span class="string">'y'</span>}}}))
+ <span class="comment">--&gt; {1, 2, 3, 4, {{"x", "y"}, ["k"]=2}}
+</span> <span class="global">print</span>(_.str({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="keyword">function</span>(a) <span class="keyword">return</span> a <span class="keyword">end</span>}, <span class="number">5</span>))
+ <span class="comment">--&gt; {1, 2, 3, 4, 5}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.table"></a>
+    <strong>_.table</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1739">line 1739</a>
+    </dt>
+    <dd>
+    Cast parameters to table using table.pack
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         value to cast
+        </li>
+        <li><span class="parameter">...</span>
+         The parameters to pass to any detected function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        casted value
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="global">print</span>(_.<span class="global">table</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>))
+ <span class="comment">--&gt; {1, 2, 3}
+</span> <span class="global">print</span>(_.<span class="global">table</span>(<span class="string">"123"</span>))
+ <span class="comment">--&gt; {"123"}
+</span> <span class="global">print</span>(_.<span class="global">table</span>(<span class="number">0</span>))
+ <span class="comment">--&gt; {0}
+</span></pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Number"></a>Number </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "_.inRange"></a>
+    <strong>_.inRange</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1864">line 1864</a>
+    </dt>
+    <dd>
+    Checks if n is between start and up to but not including, end. <br/>
+ If end is not specified it’s set to start with start then set to 0.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">n</span>
+         The number to check.
+        </li>
+        <li><span class="parameter">start</span>
+         The start of the range.
+        </li>
+        <li><span class="parameter">stop</span>
+         The end of the range.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns true if n is in the range, else false.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="global">print</span>(_.inRange(-<span class="number">3</span>, -<span class="number">4</span>, <span class="number">8</span>))
+ <span class="comment">--&gt; true
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.random"></a>
+    <strong>_.random</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1886">line 1886</a>
+    </dt>
+    <dd>
+    Produces a random number between min and max (inclusive). <br/>
+ If only one argument is provided a number between 0 and the given
+ number is returned. If floating is true, a floating-point number is
+ returned instead of an integer.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">min</span>
+         the minimum possible value.
+         (<em>default</em> 0)
+        </li>
+        <li><span class="parameter">max</span>
+         the maximum possible value.
+         (<em>default</em> 1)
+        </li>
+        <li><span class="parameter">floating</span>
+         Specify returning a floating-point number.
+         (<em>default</em> false)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the random number.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.random())
+ <span class="comment">--&gt; 1
+</span> _.<span class="global">print</span>(_.random(<span class="number">5</span>))
+ <span class="comment">--&gt; 3
+</span> _.<span class="global">print</span>(_.random(<span class="number">5</span>, <span class="number">10</span>, <span class="keyword">true</span>))
+ <span class="comment">--&gt; 8.8120200577248
+</span></pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Object"></a>Object </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "_.findKey"></a>
+    <strong>_.findKey</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1963">line 1963</a>
+    </dt>
+    <dd>
+    This method is like _.find except that it returns the key of the
+ first element predicate returns truthy for instead of the element itself.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+         The collection to search. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the key of the matched element, else nil
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.findKey({a={a = <span class="number">1</span>}, b={a = <span class="number">2</span>}, c={a = <span class="number">3</span>, x = <span class="number">1</span>}},
+ <span class="keyword">function</span>(v)
+     <span class="keyword">return</span> v.a == <span class="number">3</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; c
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.findLastKey"></a>
+    <strong>_.findLastKey</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1984">line 1984</a>
+    </dt>
+    <dd>
+    This method is like _.find except that it returns the key of the
+ first element predicate returns truthy for instead of the element itself.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+         The object to search. (table|string)
+        </li>
+        <li><span class="parameter">predicate</span>
+         The function invoked per iteration
+        </li>
+        <li><span class="parameter">selfArg</span>
+         The self binding of predicate.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the key of the matched element, else nil
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.findLastKey({a={a=<span class="number">3</span>}, b={a = <span class="number">2</span>}, c={a=<span class="number">3</span>, x = <span class="number">1</span>}},
+ <span class="keyword">function</span>(v)
+     <span class="keyword">return</span> v.a == <span class="number">3</span>
+ <span class="keyword">end</span>))
+ <span class="comment">--&gt; c
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.functions"></a>
+    <strong>_.functions</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2000">line 2000</a>
+    </dt>
+    <dd>
+    Creates an array of function property names from all enumerable
+ properties, own and inherited, of object.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+         The object to inspect.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of property names.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.functions(<span class="global">table</span>))
+ <span class="comment">--&gt; {"concat", "insert", "maxn", "pack", "remove", "sort", "unpack"}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.get"></a>
+    <strong>_.get</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1911">line 1911</a>
+    </dt>
+    <dd>
+    Gets the property value at path of object.  If the resolved value
+ is nil the defaultValue is used in its place.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+         The object to query.
+        </li>
+        <li><span class="parameter">path</span>
+         The path of the property to get.
+        </li>
+        <li><span class="parameter">defaultValue</span>
+         The value returned if the resolved value is nil.
+         (<em>default</em> nil)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the resolved value.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> object = {a={b={c={d=<span class="number">5</span>}}}}
+ _.<span class="global">print</span>(_.get(object, {<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>, <span class="string">'d'</span>}))
+ <span class="comment">--&gt; 5
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.has"></a>
+    <strong>_.has</strong>
+    <a style="float:right;" href="source/lodash.lua.html#1935">line 1935</a>
+    </dt>
+    <dd>
+    Checks if path is a direct property.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+         The object to query
+        </li>
+        <li><span class="parameter">path</span>
+         The path to check (Array)
+        </li>
+    </ul>
+
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> object = {a={b={c={d}}}}
+ <span class="global">print</span>(_.has(object, {<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>}))
+ <span class="comment">--&gt; true
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.invert"></a>
+    <strong>_.invert</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2022">line 2022</a>
+    </dt>
+    <dd>
+    Creates an object composed of the inverted keys and values of object. <br/>
+ If object contains duplicate values, subsequent values overwrite
+ property assignments of previous values unless multiValue is true.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+         The object to invert.
+        </li>
+        <li><span class="parameter">multiValue</span>
+         Allow multiple values per key.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new inverted object.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.invert({a=<span class="string">'1'</span>, b=<span class="string">'2'</span>, c=<span class="string">'3'</span>, d=<span class="string">'3'</span>}))
+ <span class="comment">--&gt; {[2]="b", [3]="d", [1]="a"}
+</span> _.<span class="global">print</span>(_.invert({a=<span class="string">'1'</span>, b=<span class="string">'2'</span>, c=<span class="string">'3'</span>, d=<span class="string">'3'</span>}, <span class="keyword">true</span>))
+ <span class="comment">--&gt; {[2]="b", [3]={"c", "d"}, [1]="a"}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.keys"></a>
+    <strong>_.keys</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2058">line 2058</a>
+    </dt>
+    <dd>
+    Creates an array of the own enumerable property names of object.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+         The object to query. (table|string)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the array of property names.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.keys(<span class="string">"test"</span>))
+ <span class="comment">--&gt; {1, 2, 3, 4}
+</span> _.<span class="global">print</span>(_.keys({a=<span class="number">1</span>, b=<span class="number">2</span>, c=<span class="number">3</span>}))
+ <span class="comment">--&gt; {"c", "b", "a"}
+</span> </pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.pairs"></a>
+    <strong>_.pairs</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2077">line 2077</a>
+    </dt>
+    <dd>
+    Creates a two dimensional array of the key-value pairs for object.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+         The object to query
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of key-value pairs.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example">  _.<span class="global">print</span>(_.<span class="global">pairs</span>({<span class="number">1</span>, <span class="number">2</span>, <span class="string">'x'</span>, a=<span class="string">'b'</span>}))
+ <span class="comment">--&gt; {{1, 1}, {2, 2}, {3, "x"}, {"a", "b"}}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.result"></a>
+    <strong>_.result</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2097">line 2097</a>
+    </dt>
+    <dd>
+    This method is like _.get except that if the resolved value is a
+ function it’s invoked with additional parameters and its result is returned.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+         The object to query.
+        </li>
+        <li><span class="parameter">path</span>
+         The path of the property to get.
+        </li>
+        <li><span class="parameter">defaultValue</span>
+         The value returned if the resolved value is nil.
+         (<em>default</em> nil)
+        </li>
+        <li><span class="parameter">...</span>
+         Additional parameters to pass to function
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the resolved value.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> object = {a=<span class="number">5</span>, b={c=<span class="keyword">function</span>(a) <span class="global">print</span>(a) <span class="keyword">end</span>}}
+ _.result(object, {<span class="string">'b'</span>, <span class="string">'c'</span>}, <span class="keyword">nil</span>, <span class="number">5</span>)
+ <span class="comment">--&gt; 5
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.values"></a>
+    <strong>_.values</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2116">line 2116</a>
+    </dt>
+    <dd>
+    Creates an array of the own enumerable property values of object.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">object</span>
+         The object to query. (table|string)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the array of property values.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.values(<span class="string">"test"</span>))
+ <span class="comment">--&gt; {"t", "e", "s", "t"}
+</span> _.<span class="global">print</span>(_.values({a=<span class="number">1</span>, b=<span class="number">2</span>, c=<span class="number">3</span>}))
+ <span class="comment">--&gt; {1, 3, 2}
+</span> </pre>
+    </ul>
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Utility"></a>Utility </h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "_.constant"></a>
+    <strong>_.constant</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2140">line 2140</a>
+    </dt>
+    <dd>
+    Creates a function that returns value.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         Any value.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new function.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> object = {x=<span class="number">5</span>}
+ <span class="keyword">local</span> getter = _.constant(object)
+ _.<span class="global">print</span>(getter() == object);
+ <span class="comment">--&gt; true
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.identity"></a>
+    <strong>_.identity</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2152">line 2152</a>
+    </dt>
+    <dd>
+    This method returns the first argument provided to it.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">value</span>
+         Any value.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns value.
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> object = {x=<span class="number">5</span>}
+ _.<span class="global">print</span>(_.identity(object) == object);
+ <span class="comment">--&gt; true
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.noop"></a>
+    <strong>_.noop</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2209">line 2209</a>
+    </dt>
+    <dd>
+    A no-operation function that returns nil regardless of the arguments
+ it receives.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         Any arguments
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns nil
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> <span class="keyword">local</span> object = {x=<span class="number">5</span>}
+ _.<span class="global">print</span>(_.noop(object) == <span class="keyword">nil</span>);
+ <span class="comment">--&gt; true
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.print"></a>
+    <strong>_.print</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2219">line 2219</a>
+    </dt>
+    <dd>
+    Print more readable representation of arguments using _.str
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">...</span>
+         values to print
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Return human readable string of the value
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>({<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, {k=<span class="number">2</span>, {<span class="string">'x'</span>, <span class="string">'y'</span>}}})
+ <span class="comment">--&gt; {1, 2, 3, 4, {{"x", "y"}, [k]=2}}
+</span></pre>
+    </ul>
+
+</dd>
+    <dt>
+    <a name = "_.range"></a>
+    <strong>_.range</strong>
+    <a style="float:right;" href="source/lodash.lua.html#2238">line 2238</a>
+    </dt>
+    <dd>
+    Creates an array of numbers (positive and/or negative) progressing
+ from start up to, including, end. <br/>
+ If end is not specified it’s set to start with start then set to 1.
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">start</span>
+         The start of the range.
+         (<em>default</em> 1)
+        </li>
+        <li><span class="parameter">stop</span>
+         Then end of the range.
+        </li>
+        <li><span class="parameter">step</span>
+         The value to increment or decrement by
+         (<em>default</em> 1)
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+        Returns the new array of numbers
+    </ol>
+
+
+
+    <h3>Usage:</h3>
+    <ul>
+        <pre class="example"> _.<span class="global">print</span>(_.range(<span class="number">5</span>, <span class="number">20</span>, <span class="number">3</span>))
+ <span class="comment">--&gt; {5, 8, 11, 14, 17, 20}
+</span></pre>
+    </ul>
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.3</a></i>
+<i style="float:right;">Last updated 2015-08-16 20:12:50 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>
