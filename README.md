@@ -14,15 +14,3 @@ Visit the complete [API Doc](http://tedmog.github.io/lodash.lua).
 	_.print(_.map({1, 2, 3, 4, 5}, function(n)
 		return n * 2
 	end))
-
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
