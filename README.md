@@ -1,21 +1,20 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## lodash.lua v0.1 beta
+lodash inspired library for lua
 
-### What is this repository for? ###
+### Summary ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+A functional programming library for lua in respect to the javascript library lodash.
+Visit the complete [API Doc](http://tedmog.github.io/lodash.lua).
 
-### How do I get set up? ###
+### How to use the library? ###
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+	local _ = require 'lodash'
+	_.print(_.map({1, 2, 3, 4, 5}, function(n)
+		return n * 2
+	end))
+
 
 ### Contribution guidelines ###
 

@@ -1,0 +1,1 @@
+deploy doc command: git subtree push --prefix doc/ origin gh-pages
