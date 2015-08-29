@@ -1,6 +1,6 @@
 # README #
 
-## lodash.lua v0.2
+## lodash.lua v0.02
 lodash inspired library for lua
 
 ### Summary ###
