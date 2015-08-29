@@ -4,7 +4,9 @@
 -- @author Ted Moghimi
 -- @license MIT
 
-local _ = {}
+local _ = {
+    _VERSION = '0.2'
+}
 
 --- Array
 -- @section Array
