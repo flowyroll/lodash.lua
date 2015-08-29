@@ -1302,7 +1302,7 @@ _.ary = function(func, n)
             return func((...))
         else
             local t = _.table(...)
-            local first = _.first(t, n)
+            local first = _.take(t, n)
             return func(_.args(first))
         end
     end
@@ -1537,7 +1537,7 @@ _.gte = function (value, other, ...)
     elseif _.isFunction(value) then
         return value(...) >= other(...)
     elseif _.isTable(value) then
-        return _.eq(value, other) 
+        return false 
     end
     return false
 end
@@ -1691,7 +1691,7 @@ _.lte = function (value, other, ...)
     elseif _.isFunction(value) then
         return value(...) <= other(...)
     elseif _.isTable(value) then
-        return _.eq(value, other) 
+        return false
     end
     return false
 end
