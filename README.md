@@ -24,4 +24,4 @@ _.print(_.map({1, 2, 3, 4, 5}, function(n)
 end))
 ```
 
-- Follow the [API documentation](http://tedmog.github.io/lodash.lua) for the complete list.
+- Follow the [API documentation](http://axmat.github.io/lodash.lua) for the complete list.
