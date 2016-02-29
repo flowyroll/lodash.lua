@@ -9,7 +9,7 @@ description = {
     detailed = [[]],
     homepage = "https://github.com/axmat/lodash.lua",
     license = "MIT",
-    maintainer = "Ted Moghimi <ted.moghimi@gmail.com>",
+    maintainer = "Daniel Moghimi <daniel.mogimi@gmail.com>",
 }
 dependencies = {
   "lua >= 5.1",
