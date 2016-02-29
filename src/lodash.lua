@@ -1,7 +1,7 @@
 ---
 -- lodash for lua
 -- @module lodash
--- @author Ahmet (acx.mat@gmail.com)
+-- @author Daniel Moghimi (daniel.mogimi@gmail.com)
 -- @license MIT
 
 local _ = {
