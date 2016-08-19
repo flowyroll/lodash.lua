@@ -12,7 +12,7 @@ description = {
     maintainer = "Daniel Moghimi <daniel.mogimi@gmail.com>",
 }
 dependencies = {
-  "lua >= 5.1",
+  "lua >= 5.2",
 }
 build = {
     type = "builtin",
