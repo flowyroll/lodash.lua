@@ -553,6 +553,23 @@ local function test_functions()
 		'{"concat", "insert", "maxn", "pack", "remove", "sort", "unpack"}')
 end
 
+local function test_assign()
+  local object = {
+    a = 0,
+  }
+  local one = {
+    a = 1,
+  }
+  local two = {
+    b = 3,
+  }
+
+  _.assign(object, one, two)
+
+  assert(object.a == 1)
+  assert(object.b == 3)
+end
+
 local function test_get()
 	local object = {a={b={c={d=5}}}}
 	assert(_.get(object, {'a', 'b', 'c', 'd'}) == 5)
