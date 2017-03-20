@@ -1909,6 +1909,16 @@ end
 --- Object
 -- @section Object
 
+_.assign = function(object, ...)
+  for index = 1, select('#', ...) do
+    for k, v in pairs(select(index, ...)) do
+      object[k] = v
+    end
+  end
+
+  return object
+end
+
 ---
 -- Gets the property value at path of object. If the resolved value 
 -- is nil the defaultValue is used in its place.
