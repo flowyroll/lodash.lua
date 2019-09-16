@@ -1,0 +1,9 @@
+version: 2
+jobs:
+  build:
+    docker:
+#      - image: quay.io/3scale/s2i-openresty-centos7:luarocks-build
+       - image: jfernandes/circleci-node-lua:v1.0.0
+    steps:
+      - checkout
+      - run: busted spec
