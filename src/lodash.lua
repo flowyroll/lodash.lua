@@ -1,5 +1,5 @@
 ---
--- lodash for lua
+-- lodash for lua https://github.com/axmat/lodash.lua
 -- @module lodash
 -- @author Daniel Moghimi (daniel.mogimi@gmail.com)
 -- @license MIT
@@ -84,14 +84,19 @@ _.difference = function (array, ...)
     local c = 1
     local tmp = _.table(...)
     for k, v in ipairs(array) do
+        local loopBroken = false
         while not _.isNil(tmp[c]) do
             for j, v2 in ipairs(tmp[c]) do
-                if v == v2 then goto doubleBreak end
+                if v == v2 then 
+                    loopBroken = true
+                    break
+                end
             end
             c = c + 1
         end
-        _.push(t, v)
-        ::doubleBreak::
+        if not loopBroken then
+            _.push(t, v)
+        end
         c = 1
     end
     return t
@@ -140,18 +145,16 @@ local dropWhile = function(array, predicate, selfArg, start, step, right)
     local t = {}
     local c = start
     while not _.isNil(array[c]) do
-        ::cont::
-        if #t == 0 and 
-            callIteratee(predicate, selfArg, array[c], c, array) then
+        if #t == 0 and callIteratee(predicate, selfArg, array[c], c, array) then
             c = c + step
-            goto cont
-        end
-        if right then
-            _.enqueue(t, array[c])
         else
-            _.push(t, array[c])
+            if right then
+                _.enqueue(t, array[c])
+            else
+                _.push(t, array[c])
+            end
+            c = c + step            
         end
-        c = c + step            
     end 
     return t
 end
@@ -387,7 +390,6 @@ _.join = function(array, separator)
     return table.concat(tmp)
 end
 
-
 ---
 -- Gets the last element of array.
 -- @usage _.print(_.last({'w', 'x', 'y', 'z'}))
@@ -428,14 +430,17 @@ end
 _.pull = function(array, ...)
     local i = 1
     while not _.isNil(array[i]) do
+        local loopBroken = false
         for k, v in ipairs(_.table(...)) do
             if array[i] == v then 
                 table.remove(array, i)
-                goto cont
+                loopBroken = true
+                break
             end
         end
-        i = i + 1
-        ::cont::
+        if not loopBroken then
+            i = i + 1
+        end
     end 
     return array
 end
@@ -492,10 +497,9 @@ _.remove = function(array, predicate)
     while not _.isNil(array[c]) do
         if predicate(array[c], c, array) then
             _.push(t, table.remove(array, c))
-            goto cont
+        else
+            c = c + 1
         end        
-        c = c + 1
-        ::cont::
     end 
     return t
 end
@@ -903,6 +907,9 @@ end
 
 local filter = function(collection, predicate, selfArg, reject)
     local t = {}
+    setmetatable(t, {
+        __index = _
+    })
     for k, v in _.iter(collection) do
         local check = callIteratee(predicate, selfArg, v, k, collection)
         if reject then 
@@ -1012,6 +1019,9 @@ end
 -- @param[opt] selfArg The self binding of predicate.
 _.map = function (collection, iteratee, selfArg)
     local t = {}
+    setmetatable(t, {
+        __index = _
+    })
     for k, v in _.iter(collection) do
         t[k] = callIteratee(iteratee, selfArg, v, k, collection)
     end
@@ -2309,4 +2319,3 @@ _.range = function(start, ...)
 end
 
 return _
-
