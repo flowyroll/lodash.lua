@@ -368,6 +368,25 @@ _.intersection = function (...)
     -- body
 end
 
+---
+-- Converts all elements in array into a string separated by separator.
+-- @param array (Array): The array to convert.
+-- @param [separator=','] (string): The element separator.
+-- @return (string): Returns the joined string.
+_.join = function(array, separator)
+    if separator == nil then
+        separator = ','
+    end
+    local tmp = _.reduce(_.initial(array), function(result, value)
+        table.insert(result, value)
+        table.insert(result, separator)
+        return result
+    end, {})
+    table.insert(tmp, array[#array])
+
+    return table.concat(tmp)
+end
+
 
 ---
 -- Gets the last element of array.

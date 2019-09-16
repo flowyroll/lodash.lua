@@ -1,13 +1,5 @@
 local _ = require 'lodash'
 
-
-local function test_chunk()
-	assert( _.str(_.chunk({'x', 'y', 'z', 1, 2, 3, 4, true , false}, 4)) 
-		== '{{"x", "y", "z", 1}, {2, 3, 4, true}, {false}}' )
-	assert( _.str(_.chunk({'x', 'y', 'z', 1, 2, 3, 4, true , false}, 3)) 
-		== '{{"x", "y", "z"}, {1, 2, 3}, {4, true, false}}' )
-end
-
 local function test_compact()
 	assert( _.str(_.compact({'x', 'y', nil, 1, 2, 3, false, true , false})) 
 		== '{"x", "y", 1, 2, 3, true}' )
