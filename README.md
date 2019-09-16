@@ -1,4 +1,6 @@
-# README #
+# Lodash for Lua #
+
+[![CircleCI](https://circleci.com/gh/HustLion/lodash.lua.svg?style=svg)](https://circleci.com/gh/HustLion/lodash.lua)
 
 ## lodash.lua v0.02
 lodash inspired library for lua
