@@ -6,4 +6,11 @@ jobs:
        - image: jfernandes/circleci-node-lua:v1.0.0
     steps:
       - checkout
-      - run: busted spec
+      - run: 
+          name: test and save results
+          command: |
+            mkdir -p ~/test-results/junit/
+            busted spec -o junit > ~/test-results/junit/results.xml
+          when: always
+      - store_test_results:
+          path: ~/test-results
