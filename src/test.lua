@@ -90,13 +90,6 @@ local function test_table()
 	assert(_.str(_.table(1, 2, 3)) == '{1, 2, 3, ["n"]=3}')
 	assert(_.str(_.table('123')) == '{"123", ["n"]=1}')
 end
- 
-
-
-local function test_inRange()
-	assert(_.inRange(-3, -4, 8) == true)
-	assert(_.inRange(-3, -1, 8) == false)
-end
 
 local function test_findKey()
 	assert(_.str(_.findKey({a={a = 1}, b={a = 2}, c={a = 3, x = 1}}, 
