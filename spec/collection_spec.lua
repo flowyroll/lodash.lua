@@ -1,5 +1,5 @@
 local _ = require('lodash')
-describe('Array module', function()
+describe('Collection module', function()
     it('should support at', function()
         assert.is.equal('{"1", "2", "b"}', _.str(_.at({'1', '2', '3', '4', a='a', b='b'}, {1, 2}, 'b')))
     end)

@@ -1,0 +1,6 @@
+local _ = require('lodash')
+describe('Lang module', function()
+    it('should support args', function()
+        assert('1', _.str(_.args({1, 2, 3})))
+    end)
+end)
