@@ -515,6 +515,8 @@ _.rest = function (array)
     return _.slice(array, 2, #array)
 end
 
+-- lodash use tail
+_.tail = _.rest
 
 ---
 -- Reverses the array so the first element becomes the last, the second 
@@ -2317,5 +2319,47 @@ _.range = function(start, ...)
     end
     return t
 end
+
+-- union find implementation credit: https://github.com/chen0040/lua-algorithms
+local unionfind = {}
+
+unionfind.__index = unionfind
+
+function unionfind.create()
+    local s = {}
+    setmetatable(s, unionfind)
+
+    s.id = {}
+    return s
+end
+
+function unionfind:union(v, w)
+    local pv = self:root(v)
+    local pw = self:root(w)
+    if pv ~= pw then
+        self.id[pv] = pw
+    end
+
+end
+
+function unionfind:root(v)
+    if self.id[v] == nil then
+        self.id[v] = v
+    end
+    local x = v
+    while x ~= self.id[x] do
+        self.id[x] = self.id[self.id[x]]
+        x = self.id[x]
+    end
+
+    return x
+
+end
+
+function unionfind:connected(v, w)
+    return self:root(v) == self:root(w)
+end
+
+_.unionFind = unionfind
 
 return _
