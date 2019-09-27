@@ -15,4 +15,37 @@ describe('Integration', function()
         result = _.some(result, function(v) return v == 0 end)
         assert.truthy(result)
     end)
+    it('every all', function()
+        local IsDataInDifferentSets = function(dataArray, groupArray)
+            local flags = {}
+            for i, group in ipairs(groupArray) do
+                for j, value in ipairs(dataArray) do
+                    if _.includes(group, value) then
+                        if flags[i] then
+                            return false
+                        else
+                            flags[i] = true
+                        end
+                    end
+                end
+                if not flags[i] then
+                    return false
+                end
+            end
+            return true
+        end
+
+        local values1 = {1, 2, 3, 4}
+        local values2 = {1, 2, 3, 40}
+        local values3 = {1, 2, 3, 5}
+        local set1 = {1, 5, 10}
+        local set2 = {2, 6, 8}
+        local set3 = {4, 7, 9}
+        local set4 = {3, 17, 29}
+        local groups = {set1, set2, set3 , set4}
+
+        assert.truthy(IsDataInDifferentSets(values1, groups))
+        assert.falsy(IsDataInDifferentSets(values2, groups)) -- false because 40 is not in any set
+        assert.falsy(IsDataInDifferentSets(values3, groups)) -- false because 1 and 5 are in the same set
+    end)
 end)
