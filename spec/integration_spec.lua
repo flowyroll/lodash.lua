@@ -17,18 +17,18 @@ describe('Integration', function()
     end)
     it('every all', function()
         local IsDataInDifferentSets = function(dataArray, groupArray)
-            local flags = {}
             for i, group in ipairs(groupArray) do
+                local flag = false
                 for j, value in ipairs(dataArray) do
                     if _.includes(group, value) then
-                        if flags[i] then
+                        if flag then
                             return false
                         else
-                            flags[i] = true
+                            flag = true
                         end
                     end
                 end
-                if not flags[i] then
+                if not flag then
                     return false
                 end
             end
