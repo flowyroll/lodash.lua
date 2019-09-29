@@ -30,4 +30,11 @@ describe('Utility', function()
         assert.falsy(unionfind:connected(sample1, sample2))
         assert.truthy(unionfind:connected(sample1, sample3))
     end)
+    it('support union find 2', function()
+        local unionfind = _.unionFind.create()
+        unionfind:union(1, 1)
+
+        assert.truthy(unionfind:connected(1, 1)) -- return true
+        assert.falsy(unionfind:connected(1, 2)) -- return false
+    end)
 end)
