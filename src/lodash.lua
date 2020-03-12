@@ -819,9 +819,7 @@ end
 _.groupBy = function (collection, iteratee, selfArg)
     local t = {}
     for k, v in _.iter(collection) do
-        local r = _.str(
-            callIteratee(iteratee, selfArg, v, k, collection)
-        )
+        local r = callIteratee(iteratee, selfArg, v, k, collection)
         if _.isNil(t[r]) then
             t[r] = {v}
         else
