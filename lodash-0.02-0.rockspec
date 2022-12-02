@@ -1,7 +1,7 @@
 package = "lodash"
 version = "0.02-0"
 source = {
-    url = "git://github.com/flowyroll/lodash.lua",
+    url = "https://github.com/flowyroll/lodash.lua",
     tag = "v0.02",
 }
 description = {
