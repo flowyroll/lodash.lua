@@ -1,5 +1,5 @@
 ---
--- lodash for lua
+-- lodash for lua https://github.com/axmat/lodash.lua
 -- @module lodash
 -- @author Daniel Moghimi (daniel.mogimi@gmail.com)
 -- @license MIT
@@ -84,14 +84,19 @@ _.difference = function (array, ...)
     local c = 1
     local tmp = _.table(...)
     for k, v in ipairs(array) do
+        local loopBroken = false
         while not _.isNil(tmp[c]) do
             for j, v2 in ipairs(tmp[c]) do
-                if v == v2 then goto doubleBreak end
+                if v == v2 then 
+                    loopBroken = true
+                    break
+                end
             end
             c = c + 1
         end
-        _.push(t, v)
-        ::doubleBreak::
+        if not loopBroken then
+            _.push(t, v)
+        end
         c = 1
     end
     return t
@@ -140,18 +145,16 @@ local dropWhile = function(array, predicate, selfArg, start, step, right)
     local t = {}
     local c = start
     while not _.isNil(array[c]) do
-        ::cont::
-        if #t == 0 and 
-            callIteratee(predicate, selfArg, array[c], c, array) then
+        if #t == 0 and callIteratee(predicate, selfArg, array[c], c, array) then
             c = c + step
-            goto cont
-        end
-        if right then
-            _.enqueue(t, array[c])
         else
-            _.push(t, array[c])
+            if right then
+                _.enqueue(t, array[c])
+            else
+                _.push(t, array[c])
+            end
+            c = c + step            
         end
-        c = c + step            
     end 
     return t
 end
@@ -368,6 +371,24 @@ _.intersection = function (...)
     -- body
 end
 
+---
+-- Converts all elements in array into a string separated by separator.
+-- @param array (Array): The array to convert.
+-- @param [separator=','] (string): The element separator.
+-- @return (string): Returns the joined string.
+_.join = function(array, separator)
+    if separator == nil then
+        separator = ','
+    end
+    local tmp = _.reduce(_.initial(array), function(result, value)
+        table.insert(result, value)
+        table.insert(result, separator)
+        return result
+    end, {})
+    table.insert(tmp, array[#array])
+
+    return table.concat(tmp)
+end
 
 ---
 -- Gets the last element of array.
@@ -409,14 +430,17 @@ end
 _.pull = function(array, ...)
     local i = 1
     while not _.isNil(array[i]) do
+        local loopBroken = false
         for k, v in ipairs(_.table(...)) do
             if array[i] == v then 
                 table.remove(array, i)
-                goto cont
+                loopBroken = true
+                break
             end
         end
-        i = i + 1
-        ::cont::
+        if not loopBroken then
+            i = i + 1
+        end
     end 
     return array
 end
@@ -473,10 +497,9 @@ _.remove = function(array, predicate)
     while not _.isNil(array[c]) do
         if predicate(array[c], c, array) then
             _.push(t, table.remove(array, c))
-            goto cont
+        else
+            c = c + 1
         end        
-        c = c + 1
-        ::cont::
     end 
     return t
 end
@@ -492,6 +515,8 @@ _.rest = function (array)
     return _.slice(array, 2, #array)
 end
 
+-- lodash use tail
+_.tail = _.rest
 
 ---
 -- Reverses the array so the first element becomes the last, the second 
@@ -884,6 +909,9 @@ end
 
 local filter = function(collection, predicate, selfArg, reject)
     local t = {}
+    setmetatable(t, {
+        __index = _
+    })
     for k, v in _.iter(collection) do
         local check = callIteratee(predicate, selfArg, v, k, collection)
         if reject then 
@@ -993,6 +1021,9 @@ end
 -- @param[opt] selfArg The self binding of predicate.
 _.map = function (collection, iteratee, selfArg)
     local t = {}
+    setmetatable(t, {
+        __index = _
+    })
     for k, v in _.iter(collection) do
         t[k] = callIteratee(iteratee, selfArg, v, k, collection)
     end
@@ -2289,5 +2320,46 @@ _.range = function(start, ...)
     return t
 end
 
-return _
+-- union find implementation credit: https://github.com/chen0040/lua-algorithms
+local unionfind = {}
 
+unionfind.__index = unionfind
+
+function unionfind.create()
+    local s = {}
+    setmetatable(s, unionfind)
+
+    s.id = {}
+    return s
+end
+
+function unionfind:union(v, w)
+    local pv = self:root(v)
+    local pw = self:root(w)
+    if pv ~= pw then
+        self.id[pv] = pw
+    end
+
+end
+
+function unionfind:root(v)
+    if self.id[v] == nil then
+        self.id[v] = v
+    end
+    local x = v
+    while x ~= self.id[x] do
+        self.id[x] = self.id[self.id[x]]
+        x = self.id[x]
+    end
+
+    return x
+
+end
+
+function unionfind:connected(v, w)
+    return self:root(v) == self:root(w)
+end
+
+_.unionFind = unionfind
+
+return _
